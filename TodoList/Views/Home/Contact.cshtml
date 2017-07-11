@@ -1,17 +1,22 @@
-﻿@{
+﻿@model TodoList.Models.Contact
+@{
     ViewBag.Title = "Contact";
 }
+<style>
+    td {padding:3px !important;}
+</style>
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@using (Html.BeginForm()) { 
+    @Html.ValidationSummary()
+    <table>
+        <tr><td>Ad:</td><td>@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } }) @Html.ValidationMessageFor(model => model.FirstName)</td></tr>
+        <tr><td>Soyad:</td><td>@Html.EditorFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName)</td></tr>
+        <tr><td>Telefon:</td><td>@Html.EditorFor(model => model.Phone) @Html.ValidationMessageFor(model => model.Phone)</td></tr>
+        <tr><td>E-posta:</td><td>@Html.EditorFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email)</td></tr>
+        <tr><td></td><td><input type="submit" value="Kaydet" class="btn btn-primary" /></td></tr>
+    </table>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
