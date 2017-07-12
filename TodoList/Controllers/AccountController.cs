@@ -86,7 +86,7 @@ namespace TodoList.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Geçersiz giriş girişimi.");
                     return View(model);
             }
         }
@@ -129,7 +129,7 @@ namespace TodoList.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Geçersiz kod.");
                     return View(model);
             }
         }
@@ -182,7 +182,7 @@ namespace TodoList.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(result.Succeeded ? "ConfirmEmail" : "Hata");
         }
 
         //
