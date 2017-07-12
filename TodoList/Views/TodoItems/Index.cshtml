@@ -1,33 +1,33 @@
 ﻿@model IEnumerable<TodoList.Models.TodoItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Yapılacaklar";
 }
 
-<h2>Index</h2>
+<h2>Yapılacaklar</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Oluştur", "Create", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer.Name)
+            @Html.DisplayNameFor(model => model.Customer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Department.Name)
+            @Html.DisplayNameFor(model => model.Department)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Manager.FirstName)
+            @Html.DisplayNameFor(model => model.Manager)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Organizator.FirstName)
+            @Html.DisplayNameFor(model => model.Organizator)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Side.Name)
+            @Html.DisplayNameFor(model => model.Side)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -227,9 +227,9 @@
             @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
