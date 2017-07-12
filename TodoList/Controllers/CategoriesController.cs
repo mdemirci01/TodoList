@@ -39,7 +39,8 @@ namespace TodoList.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+            var category = new Category();
+            return View(category);
         }
 
         // POST: Categories/Create
@@ -51,6 +52,11 @@ namespace TodoList.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.CreateDate = DateTime.Now;
+                category.CreatedBy = User.Identity.Name;
+                category.UpdateDate = DateTime.Now;
+                category.UpdatedBy = User.Identity.Name;
+
                 db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -83,6 +89,9 @@ namespace TodoList.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.UpdateDate = DateTime.Now;
+                category.UpdatedBy = User.Identity.Name;
+
                 db.Entry(category).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
