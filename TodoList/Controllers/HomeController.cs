@@ -48,6 +48,7 @@ namespace TodoList.Controllers
                     contact.UpdatedBy = User.Identity.Name;
                     db.Contacts.Add(contact);
                     db.SaveChanges();
+                    Session["StatusMessage"] = "Kişi formu başarıyla kaydedildi";
                     return RedirectToAction("Index");
                 }
 
