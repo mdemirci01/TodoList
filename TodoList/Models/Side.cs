@@ -7,10 +7,10 @@ using System.Web;
 
 namespace TodoList.Models
 {
-    public class Side:BaseEntity
+    public class Side : BaseEntity
     {
         [StringLength(200)]
-        [Required]
+        [Required(ErrorMessage = "Ad alanı gereklidir.")]
         [DisplayName("Ad")]
         public string Name { get; set; }
         [DisplayName("Yapılacaklar")]
