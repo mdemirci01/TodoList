@@ -8,9 +8,9 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4>Yeni Hesap Oluşturun.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.ValidationSummary("Parolaların en az bir harf veya rakam karakteri olmamalıdır.Parolaların en az bir küçük harf('a' - 'z') olması gerekir.Parolaların en az bir büyük harf olması gerekir('A' - 'Z').", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Üye Ol" />
+            <input type="submit" class="btn btn-default" value="Üye Ol" />
         </div>
     </div>
 }

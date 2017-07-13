@@ -1,21 +1,23 @@
 ﻿@model IEnumerable<TodoList.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kullanıcı Listesi";
 }
 
-<h2>Index</h2>
+<h2>Kullanıcı Listesi</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Oluştur", "Register","Account")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            E-Posta
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
+            @*@Html.DisplayNameFor(model => model.EmailConfirmed)*@
+            Email Onay
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.PasswordHash)
@@ -24,25 +26,33 @@
             @Html.DisplayNameFor(model => model.SecurityStamp)
         </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+            Telefon
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+            @*@Html.DisplayNameFor(model => model.PhoneNumberConfirmed)*@
+            Telefon Onay
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            @*@Html.DisplayNameFor(model => model.TwoFactorEnabled)*@
+            İki Aşamalı Kimlik Doğrulama Etkin
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            @*@Html.DisplayNameFor(model => model.LockoutEndDateUtc)*@
+            Kilitleme Bitiş Tarihi
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
+            @*@Html.DisplayNameFor(model => model.LockoutEnabled)*@
+            Kilitleme Etkin
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
+            @*@Html.DisplayNameFor(model => model.AccessFailedCount)*@
+            Başarısız Erişim Sayısı
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @*@Html.DisplayNameFor(model => model.UserName)*@
+            Kullanıcı Adı
         </th>
         <th></th>
     </tr>
@@ -52,15 +62,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-        @*<td>
+       <td>
             @Html.DisplayFor(modelItem => item.EmailConfirmed)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityStamp)
-        </td>*@
+       @* <td>
+        @Html.DisplayFor(modelItem => item.PasswordHash)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SecurityStamp)
+    </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
