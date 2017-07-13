@@ -81,7 +81,7 @@ namespace TodoList.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Email,,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
-        {//,EmailConfirmed,PasswordHash,SecurityStamp
+        {//PasswordHash,SecurityStamp
             if (ModelState.IsValid)
             {
                 db.Entry(applicationUser).State = EntityState.Modified;
