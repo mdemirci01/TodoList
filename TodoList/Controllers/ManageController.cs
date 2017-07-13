@@ -55,12 +55,12 @@ namespace TodoList.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Şifreniz başarıyla değiştirildi."
+                : message == ManageMessageId.SetPasswordSuccess ? "Şifreniz başarıyla oluşturuldu."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "İki aşamalı kimlik doğrulama sağlayıcınız oluşturuldu."
+                : message == ManageMessageId.Error ? "Bir hata oluştu."
+                : message == ManageMessageId.AddPhoneSuccess ? "Telefon numaranız eklendi."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Telefon numaranız silindi."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -123,7 +123,7 @@ namespace TodoList.Controllers
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
-                    Body = "Your security code is: " + code
+                    Body = "Güvenlik kodunuz: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
@@ -190,7 +190,7 @@ namespace TodoList.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", "Telefon numarası doğrulanamadı");
             return View(model);
         }
 
@@ -281,8 +281,8 @@ namespace TodoList.Controllers
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.RemoveLoginSuccess ? "Dışarıdan kullanıcı girişi başarıyla kaldırıldı."
+                : message == ManageMessageId.Error ? "Bir hata oluştu."
                 : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
