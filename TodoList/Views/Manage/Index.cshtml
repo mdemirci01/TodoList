@@ -58,10 +58,8 @@
         *@
         <dt>İki Aşamalı Kullanıcı Girişleri:</dt>
         <dd>
-            <p>
-                Yapılandırılmış iki aşamalı kimlik doğrulama sağlayıcısı yok. Bu ASP.NET uygulamasını iki aşamalı kimlik doğrulamayı destekleyecek şekilde ayarlamak için
- <a href="http://go.microsoft.com/fwlink/?LinkId=403804"></a>adresini ziyaret edin.
-            </p>
+            <p>Yapılandırılmış iki aşamalı kimlik doğrulama sağlayıcısı yok. Bu ASP.NET uygulamasını iki aşamalı kimlik doğrulamayı destekleyecek şekilde ayarlamak için
+ <a href="http://go.microsoft.com/fwlink/?LinkId=403804" target="_blank">http://go.microsoft.com/fwlink/?LinkId=403804</a> adresini ziyaret edin.</p>
             @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
