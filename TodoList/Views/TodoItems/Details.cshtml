@@ -1,17 +1,17 @@
 ﻿@model TodoList.Models.TodoItem
 
 @{
-    ViewBag.Title = "Yapılacaklar Ayrıntıları";
+    ViewBag.Title = "Yapılacak İş Ayrıntıları";
 }
 
 <h2>Ayrıntılar</h2>
 
 <div>
-    <h4>Yapılacaklar</h4>
+    <h4>Yapılacak İş</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.Category)
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.Name)
+            @Html.DisplayNameFor(model => model.Customer)
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Department.Name)
+            @Html.DisplayNameFor(model => model.Department)
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Side.Name)
+            @Html.DisplayNameFor(model => model.Side)
         </dt>
 
         <dd>

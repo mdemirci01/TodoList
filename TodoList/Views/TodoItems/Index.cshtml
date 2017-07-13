@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TodoList.Models.TodoItem>
 
 @{
-    ViewBag.Title = "Yapılacaklar";
+    ViewBag.Title = "Yapılacak İş";
 }
 
-<h2>Yapılacaklar</h2>
+<h2>Yapılacaklar İş</h2>
 
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create",null, new { @class = "btn btn-primary" })
@@ -227,8 +227,8 @@
             @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
         <td>
-            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" }) 
-            @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" }) |
             @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>

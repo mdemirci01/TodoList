@@ -52,12 +52,16 @@ namespace TodoList.Models
         [DisplayName("Organizatör")]
         public virtual Contact Organizator { get; set; }
 
+        [DataType("datetime-local")]
         [DisplayName("Toplantı Tarihi")]
         public DateTime MeetingDate { get; set; }
+        [DataType("datetime-local")]
         [DisplayName("Planlanan Tarih")]
         public DateTime PlannedDate { get; set; }
+        [DataType("datetime-local")]
         [DisplayName("Bitirilme Tarihi")]
         public DateTime FinishDate { get; set; }
+        [DataType("datetime-local")]
         [DisplayName("Revize Tarihi")]
         public DateTime ReviseDate { get; set; }
         [DisplayName("Görüşme Konusu")]
@@ -68,6 +72,7 @@ namespace TodoList.Models
         public string SupporterDoctor { get; set; }
         [DisplayName("Görüşme Katılımcı Sayısı")]
         public int ConversationAttendeeCount { get; set; }
+        [DataType("datetime-local")]
         [DisplayName("Planlanan Organizasyon Tarihi")]
         public DateTime ScheduledOrganizationDate { get; set; }
         [DisplayName("Mailing Konuları")]

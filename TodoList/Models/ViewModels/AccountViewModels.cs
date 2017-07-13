@@ -48,12 +48,13 @@ namespace TodoList.Models
 
     public class LoginViewModel
     {
-        [Required]
+
+        [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
         [Display(Name = "E-Posta")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Şifre Alanı Zorunludur")]
         [DataType(DataType.Password)]
         [Display(Name = "Şifre")]
         public string Password { get; set; }
@@ -64,7 +65,7 @@ namespace TodoList.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
         [EmailAddress]
         [Display(Name = "E-posta")]
         public string Email { get; set; }
@@ -83,7 +84,7 @@ namespace TodoList.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
         [EmailAddress]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
@@ -104,7 +105,7 @@ namespace TodoList.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+      
         [EmailAddress]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
