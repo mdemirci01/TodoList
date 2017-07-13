@@ -39,15 +39,15 @@ namespace TodoList.Controllers
 
         // GET: TodoItems/Create
         public ActionResult Create()
-        {          
+        {
+            var todoitems = new TodoItem();
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
             ViewBag.ManagerId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.OrganizatorId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.SideId = new SelectList(db.Sides, "Id", "Name");
-            RedirectToAction("Index","TodoItems");
-            return View();
+            return View(todoitems);
         }
 
         // POST: TodoItems/Create
@@ -59,6 +59,10 @@ namespace TodoList.Controllers
         {
             if (ModelState.IsValid)
             {
+                todoItem.CreateDate = DateTime.Now;
+                todoItem.CreatedBy = User.Identity.Name;
+                todoItem.UpdateDate = DateTime.Now;
+                todoItem.UpdatedBy = User.Identity.Name;
                 db.TodoItems.Add(todoItem);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -103,6 +107,8 @@ namespace TodoList.Controllers
         {
             if (ModelState.IsValid)
             {
+                todoItem.UpdateDate = DateTime.Now;
+                todoItem.UpdatedBy = User.Identity.Name;
                 db.Entry(todoItem).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
