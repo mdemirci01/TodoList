@@ -46,6 +46,7 @@ namespace TodoList.Controllers
             ViewBag.ManagerId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.OrganizatorId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.SideId = new SelectList(db.Sides, "Id", "Name");
+            RedirectToAction("Index","TodoItems");
             return View();
         }
 
