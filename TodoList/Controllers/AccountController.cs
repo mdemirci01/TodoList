@@ -182,7 +182,7 @@ namespace TodoList.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Hata");
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         //
