@@ -1,46 +1,22 @@
-﻿@model TodoList.Models.Contact
+﻿@model TodoList.Models.Department
 
 @{
-    ViewBag.Title = "Kişi Sil";
+    ViewBag.Title = "Departman Sil";
 }
 
 <h2>Sil</h2>
 
 <h3>Silmek istediğinize emin misiniz?</h3>
 <div>
-    <h4>Kişi</h4>
+    <h4>Departman</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
@@ -81,7 +57,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Sil" class="btn btn-default" /> |
+            <input type="submit" value="Sil" class="btn btn-danger" /> 
             @Html.ActionLink("Listeye Geri Dön", "Index")
         </div>
     }
