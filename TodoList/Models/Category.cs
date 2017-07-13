@@ -10,7 +10,7 @@ namespace TodoList.Models
     public class Category:BaseEntity
     {
         [StringLength(200)]
-        [Required]
+        [Required(ErrorMessage = "Ad alanı gereklidir.")]
         [DisplayName("Ad")]
         public string Name { get; set; }
 

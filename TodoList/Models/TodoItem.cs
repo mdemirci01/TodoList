@@ -11,7 +11,7 @@ namespace TodoList.Models
     public class TodoItem:BaseEntity
     {
         [StringLength(200)]
-        [Required]
+        [Required(ErrorMessage = "İsim alanı gereklidir.")]
         [DisplayName("Başlık")]
         public string Title { get; set; }
         [DisplayName("Açıklama")]

@@ -6,7 +6,7 @@ namespace TodoList.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
 
@@ -29,11 +29,11 @@ namespace TodoList.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Kod")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Bu tarayıcıyı hatırlıyor musun?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -42,7 +42,7 @@ namespace TodoList.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
 
@@ -58,7 +58,7 @@ namespace TodoList.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Beni Hatırla")]
         public bool RememberMe { get; set; }
     }
 
