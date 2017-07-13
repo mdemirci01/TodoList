@@ -1,17 +1,18 @@
 ﻿@model TodoList.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Aytrıntılar";
+    ViewBag.Title = "Kullanıcı Ayrıntıları";
 }
 
-<h2>Kullanıcı Ayrıntılar</h2>
+<h2>Kullanıcı Ayrıntıları</h2>
 
 <div>
     <h4>Kullanıcı</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            E-Posta
         </dt>
 
         <dd>
@@ -19,7 +20,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
+            @*@Html.DisplayNameFor(model => model.EmailConfirmed)*@
+            E-Posta Onay
         </dt>
 
         <dd>
@@ -43,7 +45,9 @@
         </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+            Telefon
+
         </dt>
 
         <dd>
@@ -51,7 +55,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+            @*@Html.DisplayNameFor(model => model.PhoneNumberConfirmed)*@
+            Telefon Onay
         </dt>
 
         <dd>
@@ -59,7 +64,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            @*@Html.DisplayNameFor(model => model.TwoFactorEnabled)*@
+            İki Aşamalı Kimlik Doğrulama Etkin
         </dt>
 
         <dd>
@@ -67,7 +73,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            @*@Html.DisplayNameFor(model => model.LockoutEndDateUtc)*@
+            Kilitleme Bitiş Tarihi
         </dt>
 
         <dd>
@@ -75,7 +82,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
+            @*@Html.DisplayNameFor(model => model.LockoutEnabled)*@
+            Kilitleme Etkin
         </dt>
 
         <dd>
@@ -83,7 +91,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
+            @*@Html.DisplayNameFor(model => model.AccessFailedCount)*@
+            Başarısız Erişim Sayısı
         </dt>
 
         <dd>
@@ -91,7 +100,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserName)
+            @*@Html.DisplayNameFor(model => model.UserName)*@
+            Kullanıcı Adı
         </dt>
 
         <dd>
@@ -101,6 +111,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }) 
     @Html.ActionLink("Listeye Geri Dön", "Index")
 </p>
