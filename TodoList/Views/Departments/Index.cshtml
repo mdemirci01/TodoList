@@ -1,10 +1,10 @@
-﻿@model IEnumerable<TodoList.Models.Side>
+﻿@model IEnumerable<TodoList.Models.Department>
 
 @{
-    ViewBag.Title = "Taraflar";
+    ViewBag.Title = "Departmanlar";
 }
 
-<h2>Taraf</h2>
+<h2>Departmanlar</h2>
 
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create", null, new { @class = "btn btn-primary" })
@@ -47,8 +47,8 @@
             @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
         <td>
-            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" }) |
             @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
