@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TodoList.Models.Customer>
+@{
+    Layout = null;
+}
+
+<body>
+    <div>
+        <h2>Müşteri Listesi</h2>
+        @{
+            var customers = Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=musteriler.xls");
+            Response.ContentType = "application/octet-stream";
+            var firstLine = customers.FirstOrDefault();
+        }
+        @if (firstLine != null)
+        {
+            <table style="border: 1px solid black;">
+                <tr style="font-weight: bold">
+                    @foreach (var property in firstLine.GetType().GetProperties())
+                    {
+                        if (!property.GetType().GetInterfaces()
+                                .Any(x => x.IsGenericType))
+                        {
+                            <td style="border: 1px solid #a59f9f;">
+                                @{
+                                var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
+                                var displayName = (dn != null ? dn.DisplayName : property.Name);
+                            }
+                            @displayName
+                        </td>
+
+                                    }
+                                }
+                </tr>
+                @foreach (var customer in customers)
+                {
+                    <tr>
+                        @foreach (var customerProperty in customer.GetType().GetProperties())
+                        {
+                            if (!customerProperty.GetType().GetInterfaces()
+                                 .Any(x => x.IsGenericType))
+
+                            {
+                                <td style="border: 1px solid black;">@customerProperty.GetValue(customer, null)</td>
+                            }
+                        }
+                    </tr>
+                }
+            </table>
+                                }
+    </div>
+</body>
