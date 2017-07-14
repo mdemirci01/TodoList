@@ -1,16 +1,16 @@
-﻿@model IEnumerable<TodoList.Models.Media>
+﻿@model IEnumerable<TodoList.Models.TodoItem>
 @{
     Layout = null;
 }
 
 <body>
     <div>
-        <h2>Medya Listesi</h2>
+        <h2>Yapılacaklar Listesi</h2>
         @{
-            var medias= Model;
-            Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
+            var todoitems = Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=YapilacaklarListesi.xls");
             Response.ContentType = "application/octet-stream";
-            var firstLine = medias.FirstOrDefault();
+            var firstLine = todoitems.FirstOrDefault();
         }
         <table style="border: 1px solid black;">
             <tr style="font-weight: bold">
@@ -19,12 +19,12 @@
                     <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
                 }
             </tr>
-            @foreach (var media in medias)
+            @foreach (var todoitem in todoitems)
             {
                 <tr>
-                    @foreach (var mediaProperty in media.GetType().GetProperties())
+                    @foreach (var todoitemProperty in todoitem.GetType().GetProperties())
                     {
-                        <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
+                        <td style="border: 1px solid black;">@todoitemProperty.GetValue(todoitem, null)</td>
                     }
                 </tr>
             }

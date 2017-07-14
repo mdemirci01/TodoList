@@ -9,8 +9,10 @@ namespace TodoList.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+            ViewBag.CustomerCount = db.Customers.Count();
             return View();
         }
 
