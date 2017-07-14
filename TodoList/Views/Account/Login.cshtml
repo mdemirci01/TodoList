@@ -59,25 +59,25 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN LOGO -->
     <div class="logo">
         <a href="index.html">
-            <img src="~/Content/image/AcıBademLogo.png" alt="" />
+            <img src="~/Content/image/acibadem-sigorta-giris.png" alt="" style="width:520px;height:200px;" />
         </a>
     </div>
     <!-- END LOGO -->
     <!-- BEGIN LOGIN -->
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal",role = "form"}))
 
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+     {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <h3 class="form-title">Kullanıcı Girişi</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
-                <span> Enter any username and password. </span>
+                <span> Herhangi bir kullanıcı adı ve şifre girin. </span>
             </div>
-            <div class="form-group">                          
+            <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
@@ -85,16 +85,16 @@ License: You must have a valid license purchased only from themeforest(the above
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group">               
-               
+            <div class="form-group">
+
                 @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
-                <i class="fa fa-lock"></i>
+                    <i class="fa fa-lock"></i>
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Şifrenizi Giriniz", @autocomplete = "off" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-actions" >       
+            <div class="form-actions">
                 <div class="rememberme mt-checkbox mt-checkbox-outline">
                     @Html.CheckBoxFor(m => m.RememberMe)
                     @Html.LabelFor(m => m.RememberMe)
@@ -102,11 +102,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <input type="submit" value="Giriş Yap" class="btn green pull-right" />
             </div>
-       
+
             <div class="forget-password">
                 <h4>Şifrenizi mi Unuttunuz ?</h4>
                 <p>
-                Şifrenizi sıfırlamak için
+                    Şifrenizi sıfırlamak için
                     <a href="javascript:;" id="forget-password" target="_blank"> Buraya </a> tıklayın.
                 </p>
             </div>
@@ -127,10 +127,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 <button type="submit" class="btn green pull-right"> Gönder </button>
             </div>
         </form>
-         
+
         <!-- END FORGOT PASSWORD FORM -->
-      
+
     </div>
+
     <!-- END LOGIN -->
     <!-- BEGIN COPYRIGHT -->
     <div class="copyright"> @DateTime.Now.Year - Acıbadem Sigorta &copy; </div>

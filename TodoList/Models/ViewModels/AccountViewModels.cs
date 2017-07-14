@@ -41,6 +41,7 @@ namespace TodoList.Models
 
     public class ForgotViewModel
     {
+        [EmailAddress(ErrorMessage = "Geçersiz E-Posta Adresi")]
         [Required (ErrorMessage = "E-Posta Adresi Zorunludur")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
@@ -85,7 +86,7 @@ namespace TodoList.Models
     public class ResetPasswordViewModel
     {
         [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Geçersiz E-Posta Adresi")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
 
@@ -105,8 +106,8 @@ namespace TodoList.Models
 
     public class ForgotPasswordViewModel
     {
-      
-        [EmailAddress(ErrorMessage ="E-Posta Adresi Zorunludur")]
+        [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
+        [EmailAddress(ErrorMessage = "Geçersiz E-Posta Adresi")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
