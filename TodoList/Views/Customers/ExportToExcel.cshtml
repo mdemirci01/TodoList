@@ -18,8 +18,7 @@
                 <tr style="font-weight: bold">
                     @foreach (var property in firstLine.GetType().GetProperties())
                     {
-                        if (!property.GetType().GetInterfaces()
-                                .Any(x => x.IsGenericType))
+                        if (property.GetType().GetInterfaces().Where(s=>s.Name=="ICollection").FirstOrDefault() == null)
                         {
                             <td style="border: 1px solid #a59f9f;">
                                 @{
@@ -37,9 +36,7 @@
                     <tr>
                         @foreach (var customerProperty in customer.GetType().GetProperties())
                         {
-                            if (!customerProperty.GetType().GetInterfaces()
-                                 .Any(x => x.IsGenericType))
-
+                            if (customerProperty.GetType().GetInterfaces().Where(s => s.Name == "ICollection").FirstOrDefault() == null)
                             {
                                 <td style="border: 1px solid black;">@customerProperty.GetValue(customer, null)</td>
                             }
