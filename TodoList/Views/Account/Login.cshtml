@@ -66,7 +66,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN LOGIN -->
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
-        <form class="login-form" action="index.html" method="post">
+    @using (Html.BeginForm("Index", "Home"))
+    {
+        // form elements here
+
+        @*<form class="login-form" action="index.html" method="post">*@
             <h3 class="form-title">Login to your account</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
@@ -76,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 @Html.LabelFor(m => m.Email, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix" ,@placeholder="Kullanıcı Adını Giriniz" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", @placeholder = "Kullanıcı Adını Giriniz" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -85,7 +89,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder="Şifrenizi Giriniz", @autocomplete = "off" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Şifrenizi Giriniz", @autocomplete = "off" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -121,8 +125,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     <a href="javascript:;" id="forget-password"> Buraya </a> tıklayın.
                 </p>
             </div>
-       
-        </form>
+
+        @*</form>*@
+        }
         <!-- END LOGIN FORM -->
         <!-- BEGIN FORGOT PASSWORD FORM -->
         <form class="forget-form" action="index.html" method="post">
@@ -139,6 +144,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <button type="submit" class="btn green pull-right"> Gönder </button>
             </div>
         </form>
+         
         <!-- END FORGOT PASSWORD FORM -->
       
     </div>
