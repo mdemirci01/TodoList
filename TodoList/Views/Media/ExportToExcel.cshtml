@@ -16,7 +16,7 @@
             <tr style="font-weight: bold">
                 @foreach (var property in firstLine.GetType().GetProperties())
                 {
-                    <td style="border: 1px solid #a59f9f;">@property.Name</td>
+                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
                 }
             </tr>
             @foreach (var media in medias)
