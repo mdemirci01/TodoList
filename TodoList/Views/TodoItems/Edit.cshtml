@@ -100,7 +100,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MeetingDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control",
+               @Value = Model.MeetingDate.ToString("yyyy-MM-dd HH:mm",
+                      System.Globalization.CultureInfo.InvariantCulture).Replace(" ", "T")
+           } })
                 @Html.ValidationMessageFor(model => model.MeetingDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -108,7 +111,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PlannedDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PlannedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PlannedDate, new { htmlAttributes = new { @class = "form-control",
+               @Value = Model.MeetingDate.ToString("yyyy-MM-dd HH:mm",
+                      System.Globalization.CultureInfo.InvariantCulture).Replace(" ", "T")
+           } })
                 @Html.ValidationMessageFor(model => model.PlannedDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -116,7 +122,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FinishDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FinishDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FinishDate, new { htmlAttributes = new { @class = "form-control",
+               @Value = Model.MeetingDate.ToString("yyyy-MM-dd HH:mm",
+                      System.Globalization.CultureInfo.InvariantCulture).Replace(" ", "T")
+           } })
                 @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -124,7 +133,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ReviseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReviseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ReviseDate, new { htmlAttributes = new { @class = "form-control",
+               @Value = Model.MeetingDate.ToString("yyyy-MM-dd HH:mm",
+                      System.Globalization.CultureInfo.InvariantCulture).Replace(" ", "T")
+           } })
                 @Html.ValidationMessageFor(model => model.ReviseDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -164,7 +176,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ScheduledOrganizationDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ScheduledOrganizationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ScheduledOrganizationDate, new { htmlAttributes = new { @class = "form-control",
+               @Value = Model.MeetingDate.ToString("yyyy-MM-dd HH:mm",
+                      System.Globalization.CultureInfo.InvariantCulture).Replace(" ", "T")
+           } })
                 @Html.ValidationMessageFor(model => model.ScheduledOrganizationDate, "", new { @class = "text-danger" })
             </div>
         </div>
