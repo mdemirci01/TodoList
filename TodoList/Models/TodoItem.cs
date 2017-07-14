@@ -54,15 +54,19 @@ namespace TodoList.Models
 
         [DataType("datetime-local")]
         [DisplayName("Toplantı Tarihi")]
+        [Required(ErrorMessage = "Toplantı tarihi alanı gereklidir.")]
         public DateTime MeetingDate { get; set; }
         [DataType("datetime-local")]
         [DisplayName("Planlanan Tarih")]
+        [Required(ErrorMessage = "Planlanan tarih alanı gereklidir.")]
         public DateTime PlannedDate { get; set; }
         [DataType("datetime-local")]
         [DisplayName("Bitirilme Tarihi")]
+        [Required(ErrorMessage = "Bitirilme tarihi alanı gereklidir.")]  
         public DateTime FinishDate { get; set; }
         [DataType("datetime-local")]
         [DisplayName("Revize Tarihi")]
+        [Required(ErrorMessage = "Revize tarihi alanı gereklidir.")]
         public DateTime ReviseDate { get; set; }
         [DisplayName("Görüşme Konusu")]
         public string ConversationSubject { get; set; }
@@ -71,15 +75,18 @@ namespace TodoList.Models
         [DisplayName("Destekleyen Hekim")]
         public string SupporterDoctor { get; set; }
         [DisplayName("Görüşme Katılımcı Sayısı")]
+        [Required(ErrorMessage = "Görüşme katılımcı sayısı alanı gereklidir.")]
         public int ConversationAttendeeCount { get; set; }
         [DataType("datetime-local")]
         [DisplayName("Planlanan Organizasyon Tarihi")]
+        [Required(ErrorMessage = "Planlanan organizasyon tarihi alanı gereklidir.")]
         public DateTime ScheduledOrganizationDate { get; set; }
         [DisplayName("Mailing Konuları")]
         public string MailingSubjects { get; set; }
         [DisplayName("Afiş Konusu")]
         public string PosterSubject { get; set; }
         [DisplayName("Afiş Sayısı")]
+        [Required(ErrorMessage = "Afiş sayısı alanı gereklidir.")]
         public int PosterCount { get; set; }
         [DisplayName("E-Learning")]
         public string Elearning { get; set; }
