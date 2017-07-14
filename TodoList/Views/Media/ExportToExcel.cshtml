@@ -8,7 +8,7 @@
         <h2>Medya Listesi</h2>
         @{
             var medias= Model;
-            Response.AddHeader("Content-disposition", "attachment; filename=urunler.xls");
+            Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
             Response.ContentType = "application/octet-stream";
             var firstLine = medias.FirstOrDefault();
         }
