@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     <h4>Yeni Hesap Oluşturun.</h4>
     <hr />
-    @Html.ValidationSummary("Parolaların en az bir harf veya rakam karakteri olmamalıdır.Parolaların en az bir küçük harf('a' - 'z') olması gerekir.Parolaların en az bir büyük harf olması gerekir('A' - 'Z').", new { @class = "text-danger" })
+    @Html.ValidationSummary("Parolalar en az bir harf veya rakam içermelidir. Parolalar en az bir küçük harf('a' - 'z') ve en az bir büyük harf içermelidir('A' - 'Z').", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
