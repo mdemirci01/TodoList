@@ -8,7 +8,7 @@
         <h2>Müşteri Listesi</h2>
         @{
             var customers = Model;
-            Response.AddHeader("Content-disposition", "attachment; filename=urunler.xls");
+            Response.AddHeader("Content-disposition", "attachment; filename=musteriler.xls");
             Response.ContentType = "application/octet-stream";
             var firstLine = customers.FirstOrDefault();
         }
