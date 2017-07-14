@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TodoList.Controllers
 {
@@ -41,7 +42,11 @@ namespace TodoList.Controllers
         public ActionResult Create()
         {
             var todoitem = new TodoItem();
-           
+            todoitem.MeetingDate = DateTime.Now;
+            todoitem.FinishDate = DateTime.Now;
+            todoitem.PlannedDate = DateTime.Now;
+            todoitem.ReviseDate = DateTime.Now;
+            todoitem.ScheduledOrganizationDate = DateTime.Now;
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
@@ -147,6 +152,10 @@ namespace TodoList.Controllers
             db.TodoItems.Remove(todoItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.TodoItems.ToListAsync());
         }
 
         protected override void Dispose(bool disposing)

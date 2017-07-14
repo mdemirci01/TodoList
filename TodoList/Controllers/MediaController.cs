@@ -132,5 +132,9 @@ namespace TodoList.Controllers
             }
             base.Dispose(disposing);
         }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.Medias.ToListAsync());
+        }
     }
 }

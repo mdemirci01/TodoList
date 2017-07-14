@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TodoList.Models.Media>
+@{
+    Layout = null;
+}
+
+<body>
+    <div>
+        <h2>Medya Listesi</h2>
+        @{
+            var medias= Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
+            Response.ContentType = "application/octet-stream";
+            var firstLine = medias.FirstOrDefault();
+        }
+        <table style="border: 1px solid black;">
+            <tr style="font-weight: bold">
+                @foreach (var property in firstLine.GetType().GetProperties())
+                {
+                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
+                }
+            </tr>
+            @foreach (var media in medias)
+            {
+                <tr>
+                    @foreach (var mediaProperty in media.GetType().GetProperties())
+                    {
+                        <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</body>
