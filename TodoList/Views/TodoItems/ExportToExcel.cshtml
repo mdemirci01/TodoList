@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TodoList.Models.TodoItem>
+@{
+    Layout = null;
+}
+
+<body>
+    <div>
+        <h2>Yapılacaklar Listesi</h2>
+        @{
+            var todoitems = Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=YapilacaklarListesi.xls");
+            Response.ContentType = "application/octet-stream";
+            var firstLine = todoitems.FirstOrDefault();
+        }
+        <table style="border: 1px solid black;">
+            <tr style="font-weight: bold">
+                @foreach (var property in firstLine.GetType().GetProperties())
+                {
+                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
+                }
+            </tr>
+            @foreach (var todoitem in todoitems)
+            {
+                <tr>
+                    @foreach (var todoitemProperty in todoitem.GetType().GetProperties())
+                    {
+                        <td style="border: 1px solid black;">@todoitemProperty.GetValue(todoitem, null)</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</body>

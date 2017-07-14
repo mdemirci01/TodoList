@@ -5,18 +5,31 @@
 
 <body>
     <div>
-        <h2>Medya Listesi</h2>
+        <h2>şĞ Listesi</h2>
         @{
             var medias= Model;
             Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
             Response.ContentType = "application/octet-stream";
             var firstLine = medias.FirstOrDefault();
+            
         }
+
+        
+
+        @if (firstLine != null) {
         <table style="border: 1px solid black;">
             <tr style="font-weight: bold">
                 @foreach (var property in firstLine.GetType().GetProperties())
                 {
-                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
+                    if (!property.GetType().GetInterfaces()
+                            .Any(x => x.IsGenericType)) {
+                    <td style="border: 1px solid #a59f9f;">@{
+                        var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
+                        var displayName = (dn != null ? dn.DisplayName : property.Name);
+                    }
+                    @displayName</td>
+                   
+                }
                 }
             </tr>
             @foreach (var media in medias)
@@ -24,10 +37,16 @@
                 <tr>
                     @foreach (var mediaProperty in media.GetType().GetProperties())
                     {
+                        if (!mediaProperty.GetType().GetInterfaces()
+                             .Any(x => x.IsGenericType))
+                        
+                            {
                         <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
+                    }
                     }
                 </tr>
             }
         </table>
+        }
     </div>
 </body>
