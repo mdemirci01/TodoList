@@ -50,7 +50,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdatedBy)
                 </td>
-                <td>
+                <td class="text-nowrap">
                     @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Ayrıntılar", "Details", new { id = item.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
