@@ -4,7 +4,7 @@
     ViewBag.Title = "Taraflar";
 }
 
-<h2>Taraf</h2>
+<h2>Taraflar</h2>
 
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create", null, new { @class = "btn btn-primary" })
@@ -15,16 +15,16 @@
         <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th  class="text-nowrap all">
+        <th  class="text-nowrap">
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
-        <th  class="text-nowrap all">
+        <th  class="text-nowrap">
             @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
-        <th  class="text-nowrap all">
+        <th  class="text-nowrap">
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
-        <th  class="text-nowrap all">
+        <th  class="text-nowrap">
             @Html.DisplayNameFor(model => model.UpdatedBy)
         </th>
         <th data-orderable="false" class="all">Eylemler</th>
@@ -48,7 +48,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
-        <td>
+        <td class="text-nowrap">
             @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
             @Html.ActionLink("Ayrıntılar", "Details", new { id=item.Id }, new { @class = "btn btn-success" })
             @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
