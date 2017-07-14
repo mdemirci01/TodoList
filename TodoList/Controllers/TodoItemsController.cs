@@ -40,14 +40,15 @@ namespace TodoList.Controllers
         // GET: TodoItems/Create
         public ActionResult Create()
         {
-            var todoitems = new TodoItem();
+            var todoitem = new TodoItem();
+           
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
             ViewBag.ManagerId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.OrganizatorId = new SelectList(db.Contacts, "Id", "FirstName");
             ViewBag.SideId = new SelectList(db.Sides, "Id", "Name");
-            return View(todoitems);
+            return View(todoitem);
         }
 
         // POST: TodoItems/Create
