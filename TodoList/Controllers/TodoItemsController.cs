@@ -41,7 +41,11 @@ namespace TodoList.Controllers
         public ActionResult Create()
         {
             var todoitem = new TodoItem();
-           
+            todoitem.MeetingDate = DateTime.Now;
+            todoitem.FinishDate = DateTime.Now;
+            todoitem.PlannedDate = DateTime.Now;
+            todoitem.ReviseDate = DateTime.Now;
+            todoitem.ScheduledOrganizationDate = DateTime.Now;
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
