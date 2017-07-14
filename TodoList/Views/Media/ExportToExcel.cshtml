@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TodoList.Models.Media>
+@{
+    ViewBag.Title = "ExportToExcel";
+    Layout = null;
+}
+
+<body>
+    <div>
+        <h2>Urun Listesi</h2>
+        @{
+            var urunler = Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=urunler.xls");
+            Response.ContentType = "application/octet-stream";
+            var ilkSatir = urunler.FirstOrDefault();
+        }
+        <table style="border: 1px solid black;">
+            <tr style="font-weight: bold">
+                @foreach (var ozellik in ilkSatir.GetType().GetProperties())
+                {
+                    <td style="border: 1px solid #a59f9f;">@ozellik.Name</td>
+                }
+            </tr>
+            @foreach (var urun in urunler)
+            {
+                <tr>
+                    @foreach (var urunOzelligi in urun.GetType().GetProperties())
+                    {
+                        <td style="border: 1px solid black;">@urunOzelligi.GetValue(urun, null)</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</body>
