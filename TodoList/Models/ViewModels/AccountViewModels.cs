@@ -5,7 +5,7 @@ namespace TodoList.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-Posta Adresi Zorunludur")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
@@ -25,10 +25,10 @@ namespace TodoList.Models
 
     public class VerifyCodeViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Sağlayıcı Gereklidir")]
         public string Provider { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Size Gelen Kodu Giriniz")]
         [Display(Name = "Kod")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
@@ -41,7 +41,7 @@ namespace TodoList.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required (ErrorMessage = "E-Posta Adresi Zorunludur")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
@@ -51,7 +51,7 @@ namespace TodoList.Models
 
         [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
         [Display(Name = "E-Posta")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="Geçersiz E-Posta Adresi")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Şifre Alanı Zorunludur")]
@@ -66,11 +66,11 @@ namespace TodoList.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "E-Posta Alanı Zorunludur")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="Geçersiz E-Posta Adresi")]
         [Display(Name = "E-posta")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Şifre Alanı Zorunludur")]
         [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Şifre")]
@@ -89,7 +89,7 @@ namespace TodoList.Models
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Şifre Alanı Zorunludur")]
         [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Şifre")]
@@ -106,7 +106,7 @@ namespace TodoList.Models
     public class ForgotPasswordViewModel
     {
       
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="E-Posta Adresi Zorunludur")]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
