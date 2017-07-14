@@ -86,7 +86,7 @@ namespace TodoList.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Geçersiz giriş girişimi.");
+                    ModelState.AddModelError("", "E-Posta adresi veya şifreniz hatalı ");
                     return View(model);
             }
         }
