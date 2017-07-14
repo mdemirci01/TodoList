@@ -9,26 +9,28 @@
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table id="tblRecords" class="table">
+    <thead>
     <tr>
-        <th>
+        <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
-        <th>
+        <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
-        <th>
+        <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
-        <th>
+        <th  class="text-nowrap all">
             @Html.DisplayNameFor(model => model.UpdatedBy)
         </th>
-        <th></th>
+        <th data-orderable="false" class="all">Eylemler</th>
     </tr>
-
+</thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -53,5 +55,5 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>
