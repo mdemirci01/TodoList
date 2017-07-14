@@ -80,7 +80,7 @@ namespace TodoList.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {//PasswordHash,SecurityStamp
             if (ModelState.IsValid)
             {
@@ -124,6 +124,10 @@ namespace TodoList.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.Users.ToListAsync());
         }
     }
 }

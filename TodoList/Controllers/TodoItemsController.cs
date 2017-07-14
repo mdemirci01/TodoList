@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TodoList.Controllers
 {
@@ -151,6 +152,10 @@ namespace TodoList.Controllers
             db.TodoItems.Remove(todoItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.TodoItems.ToListAsync());
         }
 
         protected override void Dispose(bool disposing)
