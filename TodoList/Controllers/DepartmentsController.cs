@@ -145,7 +145,7 @@ namespace TodoList.Controllers
             };
             grid.DataBind();
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Kategori.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Departman.xls");
             Response.ContentType = "application/excel";
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
@@ -160,7 +160,7 @@ namespace TodoList.Controllers
             StringWriter sw = new StringWriter();
             sw.WriteLine("Departman Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
             Response.ClearContent();
-            Response.AddHeader("content-disposition","attachment;filename=Kategori.csv");
+            Response.AddHeader("content-disposition","attachment;filename=Departman.csv");
             Response.ContentType = "text/csv";
             var departman = db.Departments;
             foreach(var department in departman)
