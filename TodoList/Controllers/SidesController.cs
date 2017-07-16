@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
 
 namespace TodoList.Controllers
 {
@@ -128,6 +131,53 @@ namespace TodoList.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public void ExportToExcel()
+        {
+            var grid = new GridView();
+            grid.DataSource = from data in db.Sides.ToList()
+                              select new
+                              {
+                                  data.Name,
+                                  data.CreateDate,
+                                  data.CreatedBy,
+                                  data.UpdateDate,
+                                  data.UpdatedBy
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Taraf.xls");
+            Response.ContentType = "application/excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
+            grid.RenderControl(htmlTextWriter);
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
+
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("Taraf Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Taraf.csv");
+            Response.ContentType = "text/csv";
+            var side = db.Sides;
+            foreach (var sides in side)
+            {
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+
+                    sides.Name,
+                    sides.CreateDate,
+                    sides.CreatedBy,
+                    sides.UpdateDate,
+                    sides.UpdatedBy
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }
