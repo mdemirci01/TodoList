@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
 using System.IO;
+using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace TodoList.Controllers
 {
@@ -134,11 +136,6 @@ namespace TodoList.Controllers
             }
             base.Dispose(disposing);
         }
-        public async Task<ActionResult> ExportToExcel()
-        {
-            return View(await db.Medias.ToListAsync());
-        }
-
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
@@ -168,5 +165,40 @@ namespace TodoList.Controllers
             Response.Write(sw.ToString());
             Response.End();
         }
+        public void ExportToExcel()
+        {
+            var grid = new GridView();
+            grid.DataSource = from data in db.Medias.ToList()
+                              select new
+                              {
+                                  Id = data.Id,
+                                  Adı = data.Name,
+                                  Açıklama = data.Description,
+                                  Uzantı = data.Extension,
+                                  DosyaYolu = data.FilePath,
+                                  DosyaBoyutu = data.FileSize,
+                                  Yıl = data.Year,
+                                  Ay=data.Month,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
+                              };
+            grid.DataBind();
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=Medias.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
+
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
     }
 }
