@@ -371,7 +371,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @switch (ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant())
                                     {
                                         case "index":
-                                            @Html.Raw("Giriş");
+                                            if (ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="home")
+                                            {
+                                                @Html.Raw("Giriş");
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Tümü");
+                                            }
                                             break;
                                         case "create":
                                             @Html.Raw("Oluştur");
