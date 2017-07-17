@@ -7,6 +7,7 @@ using TodoList.Models;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

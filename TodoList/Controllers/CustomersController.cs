@@ -14,6 +14,7 @@ using System.IO;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
