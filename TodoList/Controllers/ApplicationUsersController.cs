@@ -155,9 +155,14 @@ namespace TodoList.Controllers
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=ApplicationUsers.xls");
             Response.ContentType = "application/excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
-            grid.RenderControl(htmlTextWriter);
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
+
             Response.Write(sw.ToString());
             Response.End();
         }
@@ -166,7 +171,7 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("EPosta,EPostaOnay,Telefon,TelefonOnay,IkiAsamaliKimlikDogrulamaEtkin,KilitlemeBitisTarihi,KilitlemeEtkin,BasarisizErisimSayisi,KullaniciAdi");
+            sw.WriteLine("E-Posta,E-Posta Onay,Telefon,Telefon Onay,Iki Asamali Kimlik Dogrulama Etkin,Kilitleme Bitis Tarihi,Kilitleme Etkin,Basarisiz Erisim Sayisi,Kullanici Adi");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=ApplicationUsers.csv");
             Response.ContentType = "text/csv";
@@ -187,6 +192,10 @@ namespace TodoList.Controllers
                     )
                     );
             }
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+           
             Response.Write(sw.ToString());
             Response.End();
         }
