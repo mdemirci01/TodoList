@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -143,11 +144,11 @@ namespace TodoList.Controllers
             OlusturulmaTarihi = data.CreateDate,
             OlusturanKullanici = data.CreatedBy,
             GuncellenmeTarihi = data.UpdateDate,
-               GuncelleyenKullanici = data.UpdatedBy
+            GuncelleyenKullanici = data.UpdatedBy
             };
             grid.DataBind();
             Response.Clear();
-            Response.AddHeader("content-disposition", "attachment;filename=Test.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Departman.xls");
             Response.ContentType = "application/ms-excel";
             Response.ContentEncoding = System.Text.Encoding.Unicode;
             Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());

@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class SidesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -138,11 +139,11 @@ namespace TodoList.Controllers
             grid.DataSource = from data in db.Sides.ToList()
                               select new
                               {
-                                  data.Name,
-                                  data.CreateDate,
-                                  data.CreatedBy,
-                                  data.UpdateDate,
-                                  data.UpdatedBy
+                                  Isim = data.Name,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
                               };
             grid.DataBind();
             Response.ClearContent();
