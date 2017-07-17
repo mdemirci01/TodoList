@@ -27,7 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>To do List</title>
+    <title>TodoList</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Preview page of Metronic Admin Theme #4 for " name="description" />
@@ -59,41 +59,42 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN LOGO -->
     <div class="logo">
         <a href="index.html">
-            <img src="~/assets/pages/img/logo-big.png" alt="" />
+            <img src="~/Content/image/acibadem-sigorta-giris.png" alt="" style="width:520px;height:200px;" />
         </a>
     </div>
     <!-- END LOGO -->
     <!-- BEGIN LOGIN -->
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
-    @using (Html.BeginForm("Index", "Home"))
-    {
-        // form elements here
+     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal",role = "form"}))
 
-        @*<form class="login-form" action="index.html" method="post">*@
-            <h3 class="form-title">Login to your account</h3>
+     {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h3 class="form-title">Kullanıcı Girişi</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
-                <span> Enter any username and password. </span>
+                <span> Herhangi bir kullanıcı adı ve şifre girin. </span>
             </div>
-            <div class="form-group">                          
+            <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", @placeholder = "Kullanıcı Adını Giriniz" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", @placeholder = "E-Posta Adresinizi Giriniz" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group">               
-               
+            <div class="form-group">
+
                 @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
-                <i class="fa fa-lock"></i>
+                    <i class="fa fa-lock"></i>
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Şifrenizi Giriniz", @autocomplete = "off" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-actions" >       
+            <div class="form-actions">
                 <div class="rememberme mt-checkbox mt-checkbox-outline">
                     @Html.CheckBoxFor(m => m.RememberMe)
                     @Html.LabelFor(m => m.RememberMe)
@@ -101,32 +102,14 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <input type="submit" value="Giriş Yap" class="btn green pull-right" />
             </div>
-            <div class="login-options">
-                <h4>İle Oturum Aç</h4>
-                <ul class="social-icons">
-                    <li>
-                        <a class="facebook" data-original-title="facebook" href="javascript:;"> </a>
-                    </li>
-                    <li>
-                        <a class="twitter" data-original-title="Twitter" href="javascript:;"> </a>
-                    </li>
-                    <li>
-                        <a class="googleplus" data-original-title="Goole Plus" href="javascript:;"> </a>
-                    </li>
-                    <li>
-                        <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
-                    </li>
-                </ul>
-            </div>
+
             <div class="forget-password">
-                <h4>Şifrenizi Unuttunuz mu ?</h4>
+                <h4>Şifrenizi mi Unuttunuz ?</h4>
                 <p>
-                Şifrenizi sıfırlamak için
-                    <a href="javascript:;" id="forget-password"> Buraya </a> tıklayın.
+                    Şifrenizi sıfırlamak için
+                    <a href="javascript:;" id="forget-password" target="_blank"> Buraya </a> tıklayın.
                 </p>
             </div>
-
-        @*</form>*@
         }
         <!-- END LOGIN FORM -->
         <!-- BEGIN FORGOT PASSWORD FORM -->
@@ -144,10 +127,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 <button type="submit" class="btn green pull-right"> Gönder </button>
             </div>
         </form>
-         
+
         <!-- END FORGOT PASSWORD FORM -->
-      
+
     </div>
+
     <!-- END LOGIN -->
     <!-- BEGIN COPYRIGHT -->
     <div class="copyright"> @DateTime.Now.Year - Acıbadem Sigorta &copy; </div>

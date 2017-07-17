@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
 
 namespace TodoList.Controllers
 {
@@ -133,5 +136,54 @@ namespace TodoList.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public void ExportToExcel()
+        {
+            var grid = new GridView();
+            grid.DataSource = from data in db.Categories.ToList()
+                              select new
+                              {
+                                  data.Name,
+                                  data.CreateDate,
+                                  data.CreatedBy,
+                                  data.UpdateDate,
+                                  data.UpdatedBy
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Kategori.xls");
+            Response.ContentType = "application/excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
+            grid.RenderControl(htmlTextWriter);
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
+
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("Kategori Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
+            Response.ContentType = "text/csv";
+            var categori = db.Categories;
+            foreach (var categories in categori)
+            {
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+
+                    categories.Name,
+                    categories.CreateDate,
+                    categories.CreatedBy,
+                    categories.UpdateDate,
+                    categories.UpdatedBy
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
     }
 }

@@ -8,6 +8,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TodoList.Controllers
 {
@@ -151,6 +155,63 @@ namespace TodoList.Controllers
             db.TodoItems.Remove(todoItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.TodoItems.ToListAsync());
+        }
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            Response.ClearContent();
+            sw.WriteLine("Baslik-Aciklama-Kategori-DosyaEki-Departman-Taraf-Müsteri-Yonetici-Organizator-ToplantiTarihi-PlanlananTarih-BitirilmeTarihi-RevizeTarihi-GorusmeKonusu-DestekleyenFirma-DestekleyenHekim-GorusmeKatilimciSayisi-PlanlananOrganizasyonTarihi-MailKonuları-AfisKonusu-AfisSayisi-Elearning-YapilanTaramalarınTurleri-YapilanTaramalardakiAsoSayisi-OrganizasyonTurleri-OrganizasyondakiAsoSayisi-AsıOrganizasyonTurleri-AsıOrganizasyonundakiAsoSayisi-AfisicinTazminatMiktari-KurumsalVerimlilikRaporu-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            Response.AddHeader("content-disposition", "attachment;filename=yapilacaklar.csv");
+            Response.ContentType = "text/csv";
+            var todoitem = db.TodoItems.ToList();
+            foreach (var todoitems in todoitem)
+            {
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}-{15}-{16}-{17}-{18}-{19}-{20}-{21}-{22}-{23}-{24}-{25}-{26}-{27}-{28}-{29}-{30}-{31}-{32}-{33}-{34}",
+
+                    todoitems.Title,
+                    todoitems.Description,
+                    todoitems.Category.Name,
+                    todoitems.Attachment,
+                    todoitems.Department.Name,
+                    todoitems.Side.Name,
+                    todoitems.Customer.Name,
+                    todoitems.Manager.FirstName,
+                    todoitems.Organizator.FirstName,
+                    todoitems.Status,                       
+                    todoitems.MeetingDate,
+                    todoitems.PlannedDate,
+                    todoitems.FinishDate,
+                    todoitems.ReviseDate,
+                    todoitems.ConversationSubject,
+                    todoitems.SupporterCompany,
+                    todoitems.SupporterDoctor,
+                    todoitems.ConversationAttendeeCount,
+                    todoitems.ScheduledOrganizationDate,
+                    todoitems.MailingSubjects,
+                    todoitems.PosterSubject,
+                    todoitems.PosterCount,
+                    todoitems.Elearning,
+                    todoitems.TypesOfScans,
+                    todoitems.AsoCountInScans,
+                    todoitems.TypesOfOrganization,
+                    todoitems.AsoCountInOrganizations,
+                    todoitems.TypesOfVaccinationOrganization,
+                    todoitems.AsoCountInVaccinationOrganization,
+                    todoitems.AmountOfCompensationForPoster,
+                    todoitems.CorporateProductivityReport,
+                    todoitems.CreateDate,
+                    todoitems.CreatedBy,
+                    todoitems.UpdateDate,
+                    todoitems.UpdatedBy
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
         }
 
         protected override void Dispose(bool disposing)

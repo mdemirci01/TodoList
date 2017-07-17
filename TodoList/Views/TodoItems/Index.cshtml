@@ -4,15 +4,21 @@
     ViewBag.Title = "Yapılacak İş";
 }
 
-<h2>Yapılacak İş</h2>
+<h2>Yapılacaklar</h2>
 
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create",null, new { @class = "btn btn-primary" })
+    <a class="dt-button buttons-excel buttons-html5 btn yellow btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToExcel","TodoItems")" style="float:right;"><span>Excel</span></a>
+    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToCsv","TodoItems")" style="float:right;"><span>CSV</span></a>
+
 </p>
 <table id="tblRecords" class="table">
     <thead>
         <tr>
             <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th class="text-nowrap">
@@ -29,10 +35,7 @@
             </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Side)
-            </th>
-            <th class="text-nowrap">
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
+            </th>           
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -125,6 +128,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
@@ -141,10 +147,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Side.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
+                </td>                
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>

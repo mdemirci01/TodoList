@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TodoList.Controllers
 {
@@ -36,7 +39,7 @@ namespace TodoList.Controllers
             return View(applicationUser);
         }
         //-------------------Bu alan AccountCoıntroller'dan çağrılacak-------------//
-        
+
         // GET: ApplicationUsers/Create
         //public ActionResult Create()
         //{
@@ -67,7 +70,7 @@ namespace TodoList.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = await db.Users.FirstOrDefaultAsync(u=>u.Id == id);
+            ApplicationUser applicationUser = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -80,7 +83,7 @@ namespace TodoList.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {//PasswordHash,SecurityStamp
             if (ModelState.IsValid)
             {
@@ -98,7 +101,7 @@ namespace TodoList.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = await db.Users.FirstOrDefaultAsync(u=>u.Id==id);
+            ApplicationUser applicationUser = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -124,6 +127,67 @@ namespace TodoList.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        //public async Task<ActionResult> ExportToExcel()
+        //{
+        //    return View(await db.Users.ToListAsync());
+        //}
+
+
+        public void ExportToExcel()
+        {
+            var grid = new GridView();
+            grid.DataSource = from data in db.Users.ToList()
+                              select new
+                              {
+                                  EPosta = data.Email,
+                                  EPostaOnay = data.EmailConfirmed,
+                                  Telefon = data.PhoneNumber,
+                                  TelefonOnay = data.PhoneNumberConfirmed,
+                                  IkiAsamaliKimlikDogrulamaEtkin = data.TwoFactorEnabled,
+                                  KilitlemeBitisTarihi = data.LockoutEndDateUtc,
+                                  KilitlemeEtkin = data.LockoutEnabled,
+                                  BasarisizErisimSayisi = data.AccessFailedCount,
+                                  KullaniciAdi = data.UserName
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Kategori.xls");
+            Response.ContentType = "application/excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
+            grid.RenderControl(htmlTextWriter);
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
+
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("EPosta-EPostaOnay-Telefon-TelefonOnay-İkiAsamalıKimlikDogrulamaEtkin-KilitlemeBitisTarihi-KilitlemeEtkin-BasarısızErişimSayısı-KullanıcıAdı");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
+            Response.ContentType = "text/csv";
+            var users = db.Users;
+            foreach (var data in users)
+            {
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}",
+                                  data.Email,
+                                  data.EmailConfirmed,
+                                  data.PhoneNumber,
+                                  data.PhoneNumberConfirmed,
+                                  data.TwoFactorEnabled,
+                                  data.LockoutEndDateUtc,
+                                  data.LockoutEnabled,
+                                  data.AccessFailedCount,
+                                  data.UserName
+
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }
