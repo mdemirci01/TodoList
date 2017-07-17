@@ -2,32 +2,52 @@
 @{
     Layout = null;
 }
+<div>
+    <h2>şĞ Listesi</h2>
+    @{
+        var todoitems = Model;
+        Response.AddHeader("Content-disposition", "attachment; filename=yapılacaklar.xls");
+        Response.ContentType = "application/octet-stream";
+        var firstLine = todoitems.FirstOrDefault();
 
-<body>
-    <div>
-        <h2>Yapılacaklar Listesi</h2>
-        @{
-            var todoitems = Model;
-            Response.AddHeader("Content-disposition", "attachment; filename=YapilacaklarListesi.xls");
-            Response.ContentType = "application/octet-stream";
-            var firstLine = todoitems.FirstOrDefault();
-        }
+    }
+
+
+
+    @if (firstLine != null)
+    {
         <table style="border: 1px solid black;">
             <tr style="font-weight: bold">
                 @foreach (var property in firstLine.GetType().GetProperties())
                 {
-                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
-                }
+                    if (!property.GetType().GetInterfaces()
+                            .Any(x => x.IsGenericType))
+                    {
+                        <td style="border: 1px solid #a59f9f;">
+                            @{
+                            var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
+                            var displayName = (dn != null ? dn.DisplayName : property.Name);
+                        }
+                        @displayName
+                    </td>
+
+                                }
+                            }
             </tr>
             @foreach (var todoitem in todoitems)
             {
                 <tr>
-                    @foreach (var todoitemProperty in todoitem.GetType().GetProperties())
+                    @foreach (var TodoitemProperty in todoitem.GetType().GetProperties())
                     {
-                        <td style="border: 1px solid black;">@todoitemProperty.GetValue(todoitem, null)</td>
+                        if (!TodoitemProperty.GetType().GetInterfaces()
+                             .Any(x => x.IsGenericType))
+
+                        {
+                            <td style="border: 1px solid black;">@TodoitemProperty.GetValue(todoitem, null)</td>
+                        }
                     }
                 </tr>
             }
         </table>
-    </div>
-</body>
+                            }
+</div>
