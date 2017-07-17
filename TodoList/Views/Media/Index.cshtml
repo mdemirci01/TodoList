@@ -8,10 +8,11 @@
 
 <p>
     @Html.ActionLink("Yeni Oluştur", "Create", null, new { @class = "btn btn-primary" })
-    <a class="dt-button buttons-excel buttons-html5 btn yellow btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToExcel","Media")" style="float:right;"><span>Excel</span></a>
-    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToCsv", "Media")" style="float:right;"><span>CSV</span></a>
+    <a class="dt-button buttons-excel buttons-html5 btn yellow btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToExcel","Media")" style="float:right;"><span>Excel'e Aktar</span></a>
+    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToCsv", "Media")" style="float:right;"><span>CSV'ye Aktar</span></a>
 </p>
-<table  id="tblRecords" class="table">
+
+    <table class="table table-striped table-hover"  id="tblRecords" />
     <thead>
         <tr>
             <th class="text-nowrap all">
