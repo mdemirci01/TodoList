@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -143,7 +144,7 @@ namespace TodoList.Controllers
             OlusturulmaTarihi = data.CreateDate,
             OlusturanKullanici = data.CreatedBy,
             GuncellenmeTarihi = data.UpdateDate,
-               GuncelleyenKullanici = data.UpdatedBy
+            GuncelleyenKullanici = data.UpdatedBy
             };
             grid.DataBind();
             Response.Clear();
