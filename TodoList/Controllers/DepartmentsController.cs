@@ -139,21 +139,27 @@ namespace TodoList.Controllers
         {
             var grid = new GridView();
             grid.DataSource = from data in db.Departments.ToList() select new {
-            data.Name,
-            data.CreateDate,
-            data.CreatedBy,
-            data.UpdateDate,data.UpdatedBy
+            Isim =data.Name,
+            OlusturulmaTarihi = data.CreateDate,
+            OlusturanKullanici = data.CreatedBy,
+            GuncellenmeTarihi = data.UpdateDate,
+               GuncelleyenKullanici = data.UpdatedBy
             };
             grid.DataBind();
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Departman.xls");
-            Response.ContentType = "application/excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
-            grid.RenderControl(htmlTextWriter);
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=Test.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
+
             Response.Write(sw.ToString());
             Response.End();
-         }
+        }
         
 
         public void ExportToCsv()
