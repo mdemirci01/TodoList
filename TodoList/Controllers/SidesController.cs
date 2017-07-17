@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class SidesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -148,9 +149,11 @@ namespace TodoList.Controllers
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Taraf.xls");
             Response.ContentType = "application/excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
-            grid.RenderControl(htmlTextWriter);
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
             Response.Write(sw.ToString());
             Response.End();
         }

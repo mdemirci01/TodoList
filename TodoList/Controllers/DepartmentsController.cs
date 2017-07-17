@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -138,6 +139,13 @@ namespace TodoList.Controllers
         public void ExportToExcel()
         {
             var grid = new GridView();
+            grid.DataSource = from data in db.Departments.ToList() select new {
+            Isim =data.Name,
+            OlusturulmaTarihi = data.CreateDate,
+            OlusturanKullanici = data.CreatedBy,
+            GuncellenmeTarihi = data.UpdateDate,
+            GuncelleyenKullanici = data.UpdatedBy
+            };
             grid.DataSource = from data in db.Departments.ToList()
                               select new
                               {
@@ -149,7 +157,7 @@ namespace TodoList.Controllers
                               };
             grid.DataBind();
             Response.Clear();
-            Response.AddHeader("content-disposition", "attachment;filename=Test.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Departman.xls");
             Response.ContentType = "application/ms-excel";
             Response.ContentEncoding = System.Text.Encoding.Unicode;
             Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
@@ -171,6 +179,8 @@ namespace TodoList.Controllers
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Departman.csv");
             Response.ContentType = "text/csv";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
             var departman = db.Departments;
             foreach (var department in departman)
             {

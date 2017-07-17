@@ -4999,6 +4999,7 @@
     <Content Include="assets\assets\layouts\layout\css\themes\light.min.css" />
     <Content Include="assets\assets\layouts\layout\css\themes\light2.css" />
     <Content Include="assets\assets\layouts\layout\css\themes\light2.min.css" />
+    <Content Include="assets\assets\layouts\layout\img\1.png" />
     <Content Include="assets\assets\layouts\layout\img\ajax-loading.gif" />
     <Content Include="assets\assets\layouts\layout\img\ajax-modal-loading.gif" />
     <Content Include="assets\assets\layouts\layout\img\arrow-down.png" />
@@ -6007,7 +6008,6 @@
     <Content Include="Views\Departments\Edit.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\Media\ExportToExcel.cshtml" />
-    <Content Include="Views\Customers\ExportToExcel.cshtml" />
     <Content Include="Views\TodoItems\ExportToExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>

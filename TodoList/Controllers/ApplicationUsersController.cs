@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class ApplicationUsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
