@@ -345,10 +345,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- BEGIN PAGE BAR -->
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
-                            @*<li>
+                            <li>
                                 <a href="/">Anasayfa</a>
                                 <i class="fa fa-circle"></i>
-                            </li>*@
+                            </li>
                             <li>
                                 @switch (ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant())
                                 {
@@ -383,7 +383,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         @Html.Raw("Hesap");
                                         break;
                                     case "home":
-                                        @Html.Raw("Giriş");
+                                        @Html.Raw("Başlangıç");
                                         break;
                                     default:
                                         @Html.Raw(ViewContext.RouteData.Values["controller"].ToString());
@@ -397,7 +397,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @switch (ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant())
                                     {
                                         case "index":
-                                            @Html.Raw("Tümü");
+                                            @Html.Raw("Giriş");
                                             break;
                                         case "create":
                                             @Html.Raw("Oluştur");
