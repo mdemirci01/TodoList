@@ -152,7 +152,7 @@ namespace TodoList.Controllers
                               };
             grid.DataBind();
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Kategori.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=ApplicationUsers.xls");
             Response.ContentType = "application/excel";
             StringWriter sw = new StringWriter();
             HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
@@ -167,12 +167,12 @@ namespace TodoList.Controllers
             StringWriter sw = new StringWriter();
             sw.WriteLine("EPosta,EPostaOnay,Telefon,TelefonOnay,IkiAsamaliKimlikDogrulamaEtkin,KilitlemeBitisTarihi,KilitlemeEtkin,BasarisizErisimSayisi,KullaniciAdi");
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
+            Response.AddHeader("content-disposition", "attachment;filename=ApplicationUsers.csv");
             Response.ContentType = "text/csv";
             var users = db.Users;
             foreach (var data in users)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
                                   data.Email,
                                   data.EmailConfirmed,
                                   data.PhoneNumber,
