@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.IO;
 
 namespace TodoList.Controllers
 {
@@ -133,9 +136,68 @@ namespace TodoList.Controllers
             }
             base.Dispose(disposing);
         }
-        public async Task<ActionResult> ExportToExcel()
+        public void ExportToExcel()
         {
-            return View(await db.Customers.ToListAsync());
+            var grid = new GridView();
+            grid.DataSource = from data in db.Customers.ToList()
+                              select new
+                              {
+                                  Id = data.Id,
+                                  Isim = data.Name,
+                                  EPosta = data.Email,
+                                  Telefon = data.Phone,
+                                  Faks = data.Fax  ,                                
+                                  WebSitesi = data.Website,
+                                  Adres = data.Address,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
+                              };
+            grid.DataBind();
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=Musteriler.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
+
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
+
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("Id,Isim,E-posta,Telefon,Faks,Web Sitesi,Adres,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Musteriler.csv");
+            Response.ContentType = "text/csv";
+            var Musteriler = db.Customers;
+            foreach (var musteri in Musteriler)
+            {
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
+                    musteri.Id,
+                    musteri.Name,
+                    musteri.Email,
+                    musteri.Phone,
+                    musteri.Fax,
+                    musteri.Website,
+                    musteri.Address,                    
+                    musteri.CreateDate,
+                    musteri.CreatedBy,
+                    musteri.UpdateDate,
+                    musteri.UpdatedBy
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }

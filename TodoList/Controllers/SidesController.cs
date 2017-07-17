@@ -138,11 +138,11 @@ namespace TodoList.Controllers
             grid.DataSource = from data in db.Sides.ToList()
                               select new
                               {
-                                  data.Name,
-                                  data.CreateDate,
-                                  data.CreatedBy,
-                                  data.UpdateDate,
-                                  data.UpdatedBy
+                                  Isim = data.Name,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
                               };
             grid.DataBind();
             Response.ClearContent();
@@ -159,7 +159,7 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Taraf Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Taraf Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Taraf.csv");
             Response.ContentType = "text/csv";
@@ -167,7 +167,7 @@ namespace TodoList.Controllers
             foreach (var sides in side)
             {
                 sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
-
+                    sides.Id,
                     sides.Name,
                     sides.CreateDate,
                     sides.CreatedBy,

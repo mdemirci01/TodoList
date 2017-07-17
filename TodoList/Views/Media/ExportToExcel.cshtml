@@ -2,33 +2,37 @@
 @{
     Layout = null;
 }
-    <div>
-        <h2>şĞ Listesi</h2>
-        @{
-            var medias= Model;
-            Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
-            Response.ContentType = "application/octet-stream";
-            var firstLine = medias.FirstOrDefault();
-            
-        }
+<div>
+    <h2>Medya Listesi</h2>
+    @{
+        var medias = Model;
+        Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
+        Response.ContentType = "application/octet-stream";
+        var firstLine = medias.FirstOrDefault();
 
-        
+    }
 
-        @if (firstLine != null) {
+
+
+    @if (firstLine != null)
+    {
         <table style="border: 1px solid black;">
             <tr style="font-weight: bold">
                 @foreach (var property in firstLine.GetType().GetProperties())
                 {
                     if (!property.GetType().GetInterfaces()
-                            .Any(x => x.IsGenericType)) {
-                    <td style="border: 1px solid #a59f9f;">@{
-                        var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
-                        var displayName = (dn != null ? dn.DisplayName : property.Name);
-                    }
-                    @displayName</td>
-                   
-                }
-                }
+                            .Any(x => x.IsGenericType))
+                    {
+                        <td style="border: 1px solid #a59f9f;">
+                            @{
+                            var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
+                            var displayName = (dn != null ? dn.DisplayName : property.Name);
+                        }
+                        @displayName
+                    </td>
+
+                                }
+                            }
             </tr>
             @foreach (var media in medias)
             {
@@ -37,13 +41,13 @@
                     {
                         if (!mediaProperty.GetType().GetInterfaces()
                              .Any(x => x.IsGenericType))
-                        
-                            {
-                        <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
-                    }
+
+                        {
+                            <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
+                        }
                     }
                 </tr>
             }
         </table>
-        }
-    </div>
+                            }
+</div>
