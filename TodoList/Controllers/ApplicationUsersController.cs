@@ -192,6 +192,10 @@ namespace TodoList.Controllers
                     )
                     );
             }
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+           
             Response.Write(sw.ToString());
             Response.End();
         }
