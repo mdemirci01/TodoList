@@ -138,13 +138,15 @@ namespace TodoList.Controllers
         public void ExportToExcel()
         {
             var grid = new GridView();
-            grid.DataSource = from data in db.Departments.ToList() select new {
-            Isim =data.Name,
-            OlusturulmaTarihi = data.CreateDate,
-            OlusturanKullanici = data.CreatedBy,
-            GuncellenmeTarihi = data.UpdateDate,
-               GuncelleyenKullanici = data.UpdatedBy
-            };
+            grid.DataSource = from data in db.Departments.ToList()
+                              select new
+                              {
+                                  Isim = data.Name,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
+                              };
             grid.DataBind();
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=Test.xls");
@@ -160,20 +162,20 @@ namespace TodoList.Controllers
             Response.Write(sw.ToString());
             Response.End();
         }
-        
+
 
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
             sw.WriteLine("Departman Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
-            Response.AddHeader("content-disposition","attachment;filename=Departman.csv");
+            Response.AddHeader("content-disposition", "attachment;filename=Departman.csv");
             Response.ContentType = "text/csv";
             var departman = db.Departments;
-            foreach(var department in departman)
+            foreach (var department in departman)
             {
                 sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
-                    
+
                     department.Name,
                     department.CreateDate,
                     department.CreatedBy,
@@ -188,5 +190,5 @@ namespace TodoList.Controllers
 
 
 
-        }
+    }
 }
