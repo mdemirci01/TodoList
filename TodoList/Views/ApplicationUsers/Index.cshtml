@@ -7,10 +7,11 @@
 <h2>Kullanıcılar</h2>
 
 <p>
-    @Html.ActionLink("Yeni Oluştur", "Register","Account")
+    @Html.ActionLink("Yeni Oluştur", "Register","Account", null, new { @class = "btn btn-primary" })
 
     <a class="dt-button buttons-excel buttons-html5 btn yellow btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToExcel","ApplicationUsers")" style="float:right;"><span>Excel</span></a>
-    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0" aria-controls="sample_1" href="#" style="float:right;"><span>CSV</span></a>
+    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0" aria-controls="sample_1" href="@Url.Action("ExportToCsv","ApplicationUsers")" style="float:right;"><span>CSV</span></a>
+
 </p>
 <table id="tblRecords" class="table">
     <thead>
