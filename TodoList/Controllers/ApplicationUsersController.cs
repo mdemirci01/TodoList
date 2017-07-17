@@ -165,7 +165,7 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("EPosta-EPostaOnay-Telefon-TelefonOnay-İkiAsamalıKimlikDogrulamaEtkin-KilitlemeBitisTarihi-KilitlemeEtkin-BasarısızErişimSayısı-KullanıcıAdı");
+            sw.WriteLine("EPosta,EPostaOnay,Telefon,TelefonOnay,IkiAsamaliKimlikDogrulamaEtkin,KilitlemeBitisTarihi,KilitlemeEtkin,BasarisizErisimSayisi,KullaniciAdi");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
             Response.ContentType = "text/csv";
