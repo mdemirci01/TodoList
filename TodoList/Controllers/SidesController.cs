@@ -159,7 +159,7 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Taraf Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Taraf Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Taraf.csv");
             Response.ContentType = "text/csv";
@@ -167,7 +167,7 @@ namespace TodoList.Controllers
             foreach (var sides in side)
             {
                 sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
-
+                    sides.Id,
                     sides.Name,
                     sides.CreateDate,
                     sides.CreatedBy,
