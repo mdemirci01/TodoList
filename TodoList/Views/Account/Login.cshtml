@@ -30,7 +30,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <title>TodoList</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Preview page of Metronic Admin Theme #4 for " name="description" />
+    <meta content="Acıbadem Sigorta İçin ToDolist Projesi" name="description" />
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="/fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
@@ -107,13 +107,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 <h4>Şifrenizi mi Unuttunuz ?</h4>
                 <p>
                     Şifrenizi sıfırlamak için
-                    <a href="javascript:;" id="forget-password" target="_blank"> Buraya </a> tıklayın.
+                    <a href="@Url.Action("ForgotPassword","Account")" id="forget-password" target="_blank"> Buraya </a> tıklayın.
                 </p>
             </div>
         }
         <!-- END LOGIN FORM -->
         <!-- BEGIN FORGOT PASSWORD FORM -->
-        <form class="forget-form" action="index.html" method="post">
+        @*<form class="forget-form" action="~/Views/Account/ForgotPassword.cshtml" method="post">
             <h3>Şifrenizi Unuttunuz Mu ?</h3>
             <p> Şifrenizi sıfırlamak için E-Posta adresinizi girin. </p>
             <div class="form-group">
@@ -126,7 +126,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <button type="button" id="back-btn" class="btn red btn-outline">Geri</button>
                 <button type="submit" class="btn green pull-right"> Gönder </button>
             </div>
-        </form>
+        </form>*@
 
         <!-- END FORGOT PASSWORD FORM -->
 

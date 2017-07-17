@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -164,14 +165,14 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Kategori Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Kategori Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
             Response.ContentType = "text/csv";
             var categori = db.Categories;
             foreach (var categories in categori)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
 
                     categories.Name,
                     categories.CreateDate,
