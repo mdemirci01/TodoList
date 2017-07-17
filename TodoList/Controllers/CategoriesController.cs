@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -143,19 +144,22 @@ namespace TodoList.Controllers
             grid.DataSource = from data in db.Categories.ToList()
                               select new
                               {
-                                  data.Name,
-                                  data.CreateDate,
-                                  data.CreatedBy,
-                                  data.UpdateDate,
-                                  data.UpdatedBy
+                              
+                                  KategoriIsmi = data.Name,
+                                  OlusturulmaTarihi = data.CreateDate,
+                                  OlusturanKullanici = data.CreatedBy,
+                                  GuncellenmeTarihi = data.UpdateDate,
+                                  GuncelleyenKullanici = data.UpdatedBy
                               };
             grid.DataBind();
-            Response.ClearContent();
+            Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=Kategori.xls");
-            Response.ContentType = "application/excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
-            grid.RenderControl(htmlTextWriter);
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+            grid.RenderControl(hw);
             Response.Write(sw.ToString());
             Response.End();
         }
@@ -164,14 +168,14 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Kategori Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Kategori Ismi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
             Response.ContentType = "text/csv";
             var categori = db.Categories;
             foreach (var categories in categori)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
 
                     categories.Name,
                     categories.CreateDate,

@@ -1,14 +1,15 @@
-﻿@model IEnumerable<TodoList.Models.Media>
+﻿@model IEnumerable<TodoList.Models.Contact>
 @{
     Layout = null;
 }
+
 <div>
-    <h2>Medya Listesi</h2>
+    <h2>Kişi Listesi</h2>
     @{
-        var medias = Model;
+        var contacts = Model;
         Response.AddHeader("Content-disposition", "attachment; filename=medias.xls");
         Response.ContentType = "application/octet-stream";
-        var firstLine = medias.FirstOrDefault();
+        var firstLine = contacts.FirstOrDefault();
 
     }
 
@@ -25,29 +26,29 @@
                     {
                         <td style="border: 1px solid #a59f9f;">
                             @{
-                            var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
-                            var displayName = (dn != null ? dn.DisplayName : property.Name);
-                        }
-                        @displayName
-                    </td>
-
-                                }
+                                var dn = (System.ComponentModel.DisplayNameAttribute)property.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), true).SingleOrDefault();
+                                var displayName = (dn != null ? dn.DisplayName : property.Name);
                             }
+                            @displayName
+                        </td>
+
+                                    }
+                                }
             </tr>
-            @foreach (var media in medias)
+            @foreach (var contact in contacts)
             {
                 <tr>
-                    @foreach (var mediaProperty in media.GetType().GetProperties())
+                    @foreach (var contactProperty in contact.GetType().GetProperties())
                     {
-                        if (!mediaProperty.GetType().GetInterfaces()
+                        if (!contactProperty.GetType().GetInterfaces()
                              .Any(x => x.IsGenericType))
 
                         {
-                            <td style="border: 1px solid black;">@mediaProperty.GetValue(media, null)</td>
+                            <td style="border: 1px solid black;">@contactProperty.GetValue(contact, null)</td>
                         }
                     }
                 </tr>
             }
         </table>
-                            }
+                                }
 </div>

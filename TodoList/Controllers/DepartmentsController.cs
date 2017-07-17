@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -138,34 +139,41 @@ namespace TodoList.Controllers
         public void ExportToExcel()
         {
             var grid = new GridView();
-            grid.DataSource = from data in db.Departments.ToList() select new { data.Name,
-            data.CreateDate,
-            data.CreatedBy,
-            data.UpdateDate,data.UpdatedBy
+            grid.DataSource = from data in db.Departments.ToList() select new {
+            Isim =data.Name,
+            OlusturulmaTarihi = data.CreateDate,
+            OlusturanKullanici = data.CreatedBy,
+            GuncellenmeTarihi = data.UpdateDate,
+            GuncelleyenKullanici = data.UpdatedBy
             };
             grid.DataBind();
-            Response.ClearContent();
+            Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=Departman.xls");
-            Response.ContentType = "application/excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
-            grid.RenderControl(htmlTextWriter);
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(hw);
+
             Response.Write(sw.ToString());
             Response.End();
-         }
+        }
         
 
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Departman Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Departman Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition","attachment;filename=Departman.csv");
             Response.ContentType = "text/csv";
             var departman = db.Departments;
             foreach(var department in departman)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
                     
                     department.Name,
                     department.CreateDate,

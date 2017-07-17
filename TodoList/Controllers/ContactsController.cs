@@ -11,6 +11,7 @@ using TodoList.Models;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -130,6 +131,10 @@ namespace TodoList.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public async Task<ActionResult> ExportToExcel()
+        {
+            return View(await db.Contacts.ToListAsync());
         }
     }
 }
