@@ -143,7 +143,7 @@ namespace TodoList.Controllers
             OlusturulmaTarihi = data.CreateDate,
             OlusturanKullanici = data.CreatedBy,
             GuncellenmeTarihi = data.UpdateDate,
-               GuncelleyenKullanici = data.UpdatedBy
+            GuncelleyenKullanici = data.UpdatedBy
             };
             grid.DataBind();
             Response.Clear();
