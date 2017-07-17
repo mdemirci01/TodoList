@@ -6014,7 +6014,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\assets\apps\img\" />
     <Folder Include="assets\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="Views\Istatistikler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

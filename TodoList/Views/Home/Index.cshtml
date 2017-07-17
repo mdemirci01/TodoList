@@ -3,8 +3,8 @@
 }
 <!-- BEGIN PAGE TITLE-->
 <h1 class="page-title">
-    Blank Page Layout
-    <small>blank page layout</small>
+    @*Blank Page Layout
+    <small>blank page layout</small>*@
 </h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
@@ -28,40 +28,40 @@
         </a>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="@Url.Action("Index","TodoItems")">
             <div class="visual">
                 <i class="icon-layers"></i>
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="0">0</span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusNewCount">0</span>
                 </div>
                 <div class="desc"> Yeni İşler</div>
             </div>
         </a>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="@Url.Action("Index","TodoItems")">
             <div class="visual">
                 <i class="icon-hourglass"></i>
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="0"></span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusWaitingCount"></span>
                 </div>
                 <div class="desc"> Bekleyen İşler </div>
             </div>
         </a>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="@Url.Action("Index","TodoItems")">
             <div class="visual">
                 <i class="icon-check"></i>
             </div>
             <div class="details">
                 <div class="number">
                     
-                    <span data-counter="counterup" data-value="0"></span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusCompletedCount"></span>
                 </div>
                 <div class="desc"> Tamamlanan İşler </div>
             </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="portlet-body">
             <div id="site_statistics_loading">
-                <img src="../assets/global/img/loading.gif" alt="loading" />
+                <img src="../assets/global/img/loading.gif" alt="loading"  class="img-responsive" />
             </div>
             <div id="site_statistics_content" class="display-none">
                 <div id="site_statistics" class="chart"> </div>
