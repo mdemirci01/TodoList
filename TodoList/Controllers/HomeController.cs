@@ -15,7 +15,7 @@ namespace TodoList.Controllers
             ViewBag.CustomerCount = db.Customers.Count();
             ViewBag.StatusNewCount = db.TodoItems.Where(t => t.Status==Status.New).Count();
             ViewBag.StatusWaitingCount = db.TodoItems.Where(t => t.Status == Status.Waiting).Count();
-            ViewBag.StatusCompletedCount = db.TodoItems.Where(t => t.Status == Status.New).Count();
+            ViewBag.StatusCompletedCount = db.TodoItems.Where(t => t.Status == Status.Completed).Count();
 
             return View();
         }
