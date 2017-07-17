@@ -3,8 +3,8 @@
 }
 <!-- BEGIN PAGE TITLE-->
 <h1 class="page-title">
-    Blank Page Layout
-    <small>blank page layout</small>
+    @*Blank Page Layout
+    <small>blank page layout</small>*@
 </h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
@@ -34,7 +34,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="0">0</span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusNewCount">0</span>
                 </div>
                 <div class="desc"> Yeni İşler</div>
             </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="0"></span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusWaitingCount"></span>
                 </div>
                 <div class="desc"> Bekleyen İşler </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="details">
                 <div class="number">
                     
-                    <span data-counter="counterup" data-value="0"></span>
+                    <span data-counter="counterup" data-value="@ViewBag.StatusCompletedCount"></span>
                 </div>
                 <div class="desc"> Tamamlanan İşler </div>
             </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="portlet-body">
             <div id="site_statistics_loading">
-                <img src="../assets/global/img/loading.gif" alt="loading" />
+                <img src="../assets/global/img/loading.gif" alt="loading"  class="img-responsive" />
             </div>
             <div id="site_statistics_content" class="display-none">
                 <div id="site_statistics" class="chart"> </div>
