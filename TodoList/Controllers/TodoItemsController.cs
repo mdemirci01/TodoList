@@ -158,19 +158,20 @@ namespace TodoList.Controllers
         }
         public async Task<ActionResult> ExportToExcel()
         {
-            return View(await db.TodoItems.ToListAsync());
+            var todoItems = db.TodoItems.Include(t => t.Category).Include(t => t.Customer).Include(t => t.Department).Include(t => t.Manager).Include(t => t.Organizator).Include(t => t.Side);
+            return View(await todoItems.ToListAsync());
         }
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
             Response.ClearContent();
-            sw.WriteLine("Baslik-Aciklama-Kategori-DosyaEki-Departman-Taraf-Müsteri-Yonetici-Organizator-ToplantiTarihi-PlanlananTarih-BitirilmeTarihi-RevizeTarihi-GorusmeKonusu-DestekleyenFirma-DestekleyenHekim-GorusmeKatilimciSayisi-PlanlananOrganizasyonTarihi-MailKonuları-AfisKonusu-AfisSayisi-Elearning-YapilanTaramalarınTurleri-YapilanTaramalardakiAsoSayisi-OrganizasyonTurleri-OrganizasyondakiAsoSayisi-AsıOrganizasyonTurleri-AsıOrganizasyonundakiAsoSayisi-AfisicinTazminatMiktari-KurumsalVerimlilikRaporu-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Baslik,Aciklama,Kategori,DosyaEki,Departman,Taraf,Müsteri,Yonetici,Organizator,ToplantiTarihi,PlanlananTarih,BitirilmeTarihi,RevizeTarihi,GorusmeKonusu,DestekleyenFirma,DestekleyenHekim,GorusmeKatilimciSayisi,PlanlananOrganizasyonTarihi,MailKonuları,AfisKonusu,AfisSayisi,Elearning,YapilanTaramalarınTurleri,YapilanTaramalardakiAsoSayisi,OrganizasyonTurleri,OrganizasyondakiAsoSayisi,AsıOrganizasyonTurleri,AsıOrganizasyonundakiAsoSayisi,AfisicinTazminatMiktari,KurumsalVerimlilikRaporu,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.AddHeader("content-disposition", "attachment;filename=yapilacaklar.csv");
             Response.ContentType = "text/csv";
             var todoitem = db.TodoItems.ToList();
             foreach (var todoitems in todoitem)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}-{15}-{16}-{17}-{18}-{19}-{20}-{21}-{22}-{23}-{24}-{25}-{26}-{27}-{28}-{29}-{30}-{31}-{32}-{33}-{34}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34}",
 
                     todoitems.Title,
                     todoitems.Description,
