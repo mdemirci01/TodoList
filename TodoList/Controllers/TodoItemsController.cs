@@ -172,7 +172,7 @@ namespace TodoList.Controllers
                                   Müsteri = todoitems.Customer.Name,
                                   Yonetici = todoitems.Manager.FirstName,
                                   Organizator = todoitems.Organizator.FirstName,
-                                  Statu = todoitems.Status,
+                                  Durum = todoitems.Status,
                                   ToplantiTarihi = todoitems.MeetingDate,
                                   PlanlananTarih = todoitems.PlannedDate,
                                   BitirilmeTarihi = todoitems.FinishDate,
@@ -218,7 +218,7 @@ namespace TodoList.Controllers
         {
             StringWriter sw = new StringWriter();
             Response.ClearContent();
-            sw.WriteLine("Baslik,Aciklama,Kategori,DosyaEki,Departman,Taraf,Müsteri,Yonetici,Organizator,Statü,ToplantiTarihi,PlanlananTarih,BitirilmeTarihi,RevizeTarihi,GorusmeKonusu,DestekleyenFirma,DestekleyenHekim,GorusmeKatilimciSayisi,PlanlananOrganizasyonTarihi,MailKonuları,AfisKonusu,AfisSayisi,Elearning,YapilanTaramalarınTurleri,YapilanTaramalardakiAsoSayisi,OrganizasyonTurleri,OrganizasyondakiAsoSayisi,AsıOrganizasyonTurleri,AsıOrganizasyonundakiAsoSayisi,AfisicinTazminatMiktari,KurumsalVerimlilikRaporu,Olusturulmatarihi,OlusturanKullanici,GuncellenmeTarihi,GuncelleyenKullanici");
+            sw.WriteLine("Baslik,Aciklama,Kategori,DosyaEki,Departman,Taraf,Müsteri,Yonetici,Organizator,Durum,ToplantiTarihi,PlanlananTarih,BitirilmeTarihi,RevizeTarihi,GorusmeKonusu,DestekleyenFirma,DestekleyenHekim,GorusmeKatilimciSayisi,PlanlananOrganizasyonTarihi,MailKonuları,AfisKonusu,AfisSayisi,Elearning,YapilanTaramalarınTurleri,YapilanTaramalardakiAsoSayisi,OrganizasyonTurleri,OrganizasyondakiAsoSayisi,AsıOrganizasyonTurleri,AsıOrganizasyonundakiAsoSayisi,AfisicinTazminatMiktari,KurumsalVerimlilikRaporu,Olusturulmatarihi,OlusturanKullanici,GuncellenmeTarihi,GuncelleyenKullanici");
             Response.AddHeader("content-disposition", "attachment;filename=yapilacaklar.csv");
             Response.ContentType = "text/csv";
             var todoitem = db.TodoItems.ToList();
