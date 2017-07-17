@@ -6009,7 +6009,6 @@
     <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\Media\ExportToExcel.cshtml" />
     <Content Include="Views\TodoItems\ExportToExcel.cshtml" />
-    <Content Include="Views\Contacts\ExportToExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

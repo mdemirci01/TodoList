@@ -141,6 +141,7 @@ namespace TodoList.Controllers
             grid.DataSource = from data in db.Users.ToList()
                               select new
                               {
+                                  Id=data.Id,
                                   EPosta = data.Email,
                                   EPostaOnay = data.EmailConfirmed,
                                   Telefon = data.PhoneNumber,
@@ -179,6 +180,7 @@ namespace TodoList.Controllers
             foreach (var data in users)
             {
                 sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
+                                  data.Id,
                                   data.Email,
                                   data.EmailConfirmed,
                                   data.PhoneNumber,
