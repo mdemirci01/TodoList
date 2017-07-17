@@ -13,6 +13,10 @@ namespace TodoList.Controllers
         public ActionResult Index()
         {
             ViewBag.CustomerCount = db.Customers.Count();
+            ViewBag.StatusNewCount = db.TodoItems.Where(t => t.Status==Status.New).Count();
+            ViewBag.StatusWaitingCount = db.TodoItems.Where(t => t.Status == Status.Waiting).Count();
+            ViewBag.StatusCompletedCount = db.TodoItems.Where(t => t.Status == Status.New).Count();
+
             return View();
         }
 
