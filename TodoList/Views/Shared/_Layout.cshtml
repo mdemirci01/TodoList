@@ -147,7 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </li>
 
-                        <li class="nav-item start ">
+                        <li class="nav-item start @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="home"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-home"></i>
                                 <span class="title">Başlangıç</span>
@@ -166,14 +166,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li class="heading">
                             <h3 class="uppercase">MODÜLLER</h3>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="todoitems"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-rocket"></i>
                                 <span class="title">Yapılacaklar</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
+                                <li class="nav-item ">
                                     <a href="@Url.Action("Index","TodoItems") " class="nav-link ">
                                         <span class="title">Tüm Yapılacaklar</span>
                                     </a>
@@ -185,7 +185,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="customers"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-user"></i>
                                 <span class="title">Müşteriler</span>
@@ -204,7 +204,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="contacts"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-users"></i>
                                 <span class="title">Kişiler</span>
@@ -229,14 +229,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="media"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                                 <span class="title">Dosyalar</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
+                                <li class="nav-item ">
                                     <a href="@Url.Action("Index","Media")" class="nav-link ">
                                         <span class="title">Tüm Dosyalar</span>
                                     </a>
@@ -248,7 +248,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="categories"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-briefcase"></i>
                                 <span class="title">Kategoriler</span>
@@ -270,7 +270,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
 
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="departments"?"active":string.Empty)">
                             <a href="?p=" class="nav-link nav-toggle">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                                 <span class="title">Departmanlar</span>
@@ -289,7 +289,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="sides"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-shield"></i>
                                 <span class="title">Taraflar</span>
@@ -309,7 +309,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item  @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="applicationusers"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle" id="Button">
                                 <i class="fa fa-users"></i>
                                 <span class="title">Kullanıcılar</span>
