@@ -138,7 +138,8 @@ namespace TodoList.Controllers
         public void ExportToExcel()
         {
             var grid = new GridView();
-            grid.DataSource = from data in db.Departments.ToList() select new { data.Name,
+            grid.DataSource = from data in db.Departments.ToList() select new {
+            data.Name,
             data.CreateDate,
             data.CreatedBy,
             data.UpdateDate,data.UpdatedBy
@@ -158,14 +159,14 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Departman Adi-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            sw.WriteLine("Departman Adi,Olusturulma Tarihi,Olusturan Kullanici,Guncellenme Tarihi,Guncelleyen Kullanici");
             Response.ClearContent();
             Response.AddHeader("content-disposition","attachment;filename=Departman.csv");
             Response.ContentType = "text/csv";
             var departman = db.Departments;
             foreach(var department in departman)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}",
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
                     
                     department.Name,
                     department.CreateDate,
