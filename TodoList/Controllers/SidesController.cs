@@ -14,6 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class SidesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

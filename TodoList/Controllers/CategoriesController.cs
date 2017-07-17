@@ -14,7 +14,7 @@ using System.Web.UI;
 
 namespace TodoList.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
