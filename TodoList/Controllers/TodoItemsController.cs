@@ -161,18 +161,24 @@ namespace TodoList.Controllers
         public void ExportToCsv()
         {
             StringWriter sw = new StringWriter();
-            sw.WriteLine("Başlık-Açıklama-Kategori-Durum-Toplantı Tarihi-Planlanan Tarih-Bitirilme Tarihi-Revize Tarihi-Görüşme Konusu-Destekleyen Firma-Destekleyen Hekim-Görüşme Katılımcı Sayısı-Planlanan Organizasyon Tarihi-Mail Konuları-Afiş Konusu-Afiş Sayısı-Elearning-Yapılan Taramaların Türleri-Yapılan Taramalardaki Aso Sayısı-Organizasyon Türleri-Organizasyondaki Aso Sayısı-Aşı Organizasyon Türleri-Aşı Organizasyonundaki ASO Sayısı-Afiş İçin Tazminat Miktari-Kurumsal Verimlilik Raporu-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Departman.csv");
+            Response.AddHeader("content-disposition", "attachment;filename=yapilacaklar.csv");
             Response.ContentType = "text/csv";
             var todoitem = db.TodoItems;
             foreach (var todoitems in todoitem)
             {
-                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}-{15}-{16}-{17}-{18}-{19}-{20}-{21}-{22}-{23}-{24}-{25}-{26}-{27}",
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}-{15}-{16}-{17}-{18}-{19}-{20}-{21}-{22}-{23}-{24}-{25}-{26}-{27}-{28}-{29}-{30}-{31}-{32}-{33}-{34}",
 
                     todoitems.Title,
                     todoitems.Description,
-                    todoitems.Status,                 
+                    todoitems.CategoryId,
+                    todoitems.Attachment,
+                    todoitems.DepartmentId,
+                    todoitems.SideId,
+                    todoitems.CustomerId,
+                    todoitems.ManagerId,
+                    todoitems.OrganizatorId,
+                    todoitems.Status,                       
                     todoitems.MeetingDate,
                     todoitems.PlannedDate,
                     todoitems.FinishDate,

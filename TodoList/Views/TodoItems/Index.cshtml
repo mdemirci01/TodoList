@@ -16,6 +16,9 @@
     <thead>
         <tr>
             <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th class="text-nowrap">
@@ -32,10 +35,7 @@
             </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Side)
-            </th>
-            <th class="text-nowrap">
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
+            </th>           
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -128,6 +128,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
@@ -144,10 +147,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Side.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
+                </td>                
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
