@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TodoList.Models.Contact>
+@{
+    Layout = null;
+}
+
+<body>
+    <div>
+        <h2>Kisi Listesi</h2>
+        @{
+            var contacts = Model;
+            Response.AddHeader("Content-disposition", "attachment; filename=contacts.xls");
+            Response.ContentType = "application/octet-stream";
+            var firstLine = contacts.FirstOrDefault();
+        }
+        <table style="border: 1px solid black;">
+            <tr style="font-weight: bold">
+                @foreach (var property in firstLine.GetType().GetProperties())
+                {
+                    <td style="border: 1px solid #a59f9f;">@Html.DisplayName(property.Name)</td>
+                }
+            </tr>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    @foreach (var contactProperty in contact.GetType().GetProperties())
+                    {
+                        <td style="border: 1px solid black;">@contactProperty.GetValue(contact, null)</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</body>
