@@ -172,18 +172,18 @@ namespace TodoList.Controllers
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Kategori.csv");
             Response.ContentType = "text/csv";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
             var categori = db.Categories;
             foreach (var categories in categori)
             {
                 sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
-
                     categories.Name,
                     categories.CreateDate,
                     categories.CreatedBy,
                     categories.UpdateDate,
                     categories.UpdatedBy
-                    )
-                    );
+                    ));
             }
             Response.Write(sw.ToString());
             Response.End();

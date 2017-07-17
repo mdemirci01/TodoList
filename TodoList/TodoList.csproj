@@ -4999,6 +4999,7 @@
     <Content Include="assets\assets\layouts\layout\css\themes\light.min.css" />
     <Content Include="assets\assets\layouts\layout\css\themes\light2.css" />
     <Content Include="assets\assets\layouts\layout\css\themes\light2.min.css" />
+    <Content Include="assets\assets\layouts\layout\img\1.png" />
     <Content Include="assets\assets\layouts\layout\img\ajax-loading.gif" />
     <Content Include="assets\assets\layouts\layout\img\ajax-modal-loading.gif" />
     <Content Include="assets\assets\layouts\layout\img\arrow-down.png" />
