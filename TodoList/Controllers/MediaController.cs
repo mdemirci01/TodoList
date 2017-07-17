@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TodoList.Models;
+using System.IO;
 
 namespace TodoList.Controllers
 {
@@ -135,6 +136,36 @@ namespace TodoList.Controllers
         public async Task<ActionResult> ExportToExcel()
         {
             return View(await db.Medias.ToListAsync());
+        }
+
+        public void ExportToCsv()
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("Medya Adi-Aciklama-Uzanti-Dosya Yolu-Dosya Boyutu-Yıl-Ay-Olusturulma Tarihi-Olusturan Kullanici-Guncellenme Tarihi-Guncelleyen Kullanici");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Medya.csv");
+            Response.ContentType = "text/csv";
+            var medya = db.Medias;
+            foreach (var medias in medya)
+            {
+                sw.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}",
+
+                    medias.Name,
+                    medias.Description,
+                    medias.Extension,
+                    medias.FilePath,
+                    medias.FileSize,
+                    medias.Year,
+                    medias.Month,
+                    medias.CreateDate,
+                    medias.CreatedBy,
+                    medias.UpdateDate,
+                    medias.UpdatedBy
+                    )
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }
