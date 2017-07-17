@@ -179,6 +179,8 @@ namespace TodoList.Controllers
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Musteriler.csv");
             Response.ContentType = "text/csv";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
             var Musteriler = db.Customers;
             foreach (var musteri in Musteriler)
             {
