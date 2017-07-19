@@ -52,7 +52,7 @@ namespace TodoList.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media, HttpPostedFileBase upload)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,ContentType,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media)
         {
             if (ModelState.IsValid)
             {
@@ -62,25 +62,25 @@ namespace TodoList.Controllers
                 media.UpdatedBy = User.Identity.Name;
 
                 // upload işlemi 
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    var uploadLocation = Server.MapPath("~/uploads");
-                    var categoryFolder = "/" + media.Year.ToString() + "-" + media.Month.ToString() + "/";
-                    var fileName = upload.FileName;
-                    var extension = Path.GetExtension(fileName);
-                    var contentType = upload.ContentType;
-                    float fileSize = ((float)upload.ContentLength) / ((float)1024);
+                //if (file != null && file.ContentLength > 0)
+                //{
+                //    var uploadLocation = Server.MapPath("~/uploads");
+                //    var categoryFolder = "/" + media.Year.ToString() + "-" + media.Month.ToString() + "/";
+                //    var fileName = file.FileName;
+                //    var extension = Path.GetExtension(fileName);
+                //    var contentType = file.ContentType;
+                //    float fileSize = ((float)file.ContentLength) / ((float)1024);
 
-                    if (!Directory.Exists(uploadLocation + categoryFolder))
-                    {
-                        Directory.CreateDirectory(uploadLocation + categoryFolder);
-                    }
-                    upload.SaveAs(uploadLocation + categoryFolder + fileName);
-
-                    media.FilePath = "/uploads" + categoryFolder + fileName;
-                    media.FileSize = fileSize;
-                    media.Extension = extension;
-                    media.ContentType = contentType;
+                //    if (!Directory.Exists(uploadLocation + categoryFolder))
+                //    {
+                //        Directory.CreateDirectory(uploadLocation + categoryFolder);
+                //    }
+                //    file.SaveAs(uploadLocation + categoryFolder + fileName);
+                if (!String.IsNullOrEmpty(media.FilePath)) { 
+                    FileInfo fileInfo = new FileInfo(Server.MapPath("~"+media.FilePath));
+                    media.FileSize = ((float)fileInfo.Length)/((float)1024);
+                    media.Extension = fileInfo.Extension;
+                    media.ContentType = fileInfo.Extension;
                 }
 
 
@@ -112,18 +112,71 @@ namespace TodoList.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,Extension,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ContentType,Description,Extension,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media)
         {
             if (ModelState.IsValid)
             {
                 media.UpdateDate = DateTime.Now;
                 media.UpdatedBy = User.Identity.Name;
+                // upload işlemi 
+                if (!String.IsNullOrEmpty(media.FilePath))
+                {
+                    FileInfo fileInfo = new FileInfo(Server.MapPath("~" + media.FilePath));
+                    media.FileSize = ((float)fileInfo.Length) / ((float)1024);
+                    media.Extension = fileInfo.Extension;
+                    media.ContentType = fileInfo.Extension;
+                }
 
                 db.Entry(media).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(media);
+        }
+        public ActionResult SaveUploadedFile()
+        {
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            string categoryFolder = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var uploadLocation = Server.MapPath("~/uploads");
+                        categoryFolder = "/" + DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "/";
+                        fName = file.FileName;
+                        var extension = Path.GetExtension(fName).ToLower();
+                        var contentType = file.ContentType;
+
+                        float fileSize = ((float)file.ContentLength) / ((float)1024);
+
+                        if (!Directory.Exists(uploadLocation + categoryFolder))
+                        {
+                            Directory.CreateDirectory(uploadLocation + categoryFolder);
+                        }
+                        file.SaveAs(uploadLocation + categoryFolder + fName);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+
+
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = "/uploads" + categoryFolder + fName });
+            }
+            else
+            {
+                return Json(new { Message = "Hata oldu, dosya kaydedilemedi." });
+            }
         }
 
         // GET: Media/Delete/5
