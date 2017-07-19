@@ -81,7 +81,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 @Html.LabelFor(m => m.Email, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", @placeholder = "E-Posta Adresinizi Giriniz" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", @placeholder = "E-Posta" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -90,15 +90,21 @@ License: You must have a valid license purchased only from themeforest(the above
                 @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
                 <div class="input-icon">
                     <i class="fa fa-lock"></i>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Şifrenizi Giriniz", @autocomplete = "off" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Şifre", @autocomplete = "off" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-actions">
-                <div class="rememberme mt-checkbox mt-checkbox-outline">
+                @*<div class="rememberme mt-checkbox mt-checkbox-outline">
                     @Html.CheckBoxFor(m => m.RememberMe)
+                   
                     @Html.LabelFor(m => m.RememberMe)
-                    <span></span>
+                </div>*@
+                <div>
+                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="remember" value="1" /> Beni Hatırla
+                        <span></span>
+                    </label>
                 </div>
                 <input type="submit" value="Giriş Yap" class="btn green pull-right" />
             </div>
