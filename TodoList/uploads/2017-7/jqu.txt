@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <style>
+        .gizle1:hover{
+            /*display:none;*/
+            color:red;
+            background-color:#ffffff;
+        }
+        #panel, #flip{
+            padding:5px;
+            text-align:center;
+            background-color:#e5eecc;
+            border:solid 1px #c3c3c3;
+        }
+        #panel{
+            padding:50px;
+            display:none;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            
+                //$("button").click(function () {
+                    
+                //    if ($("button").text() == "Sil") {
+                //        $("p:first").hide();
+                //        $("p:last").show();
+                //        $("button").text("Göster");
+                //    }
+                //    else if ($("button").text() == "Göster") {
+                //        $("p:first").show();
+                //        $("p:last").hide();
+                //        $("button").text("Sil");
+                //    }
+            //});
+            //$("#pr").hover(function () {
+            //    $("#pr").css("color","red");
+            //}, function () { $("#pr").css("color", "black"); });
+            //$("input").focus(function () {
+            //    $(this).css("background-color", "#cccccc");
+            //});
+            //$("input").blur(function () {
+            //    $(this).css("background-color", "#ffffff");
+            //});
+
+        }); 
+
+
+        $(document).ready(function () {
+            //$(".giz").click(function () {
+            //    $(".gizle1").hide()
+            //});
+            //$(".goz").click(function () {
+            //    $(".gizle1").show()
+            //});
+            //$("p").on("click", function () {
+            //    $(this).hide();
+            //});
+            //$("p").on({
+            //    mouseenter: function () {
+            //        $(this).css({ 'background-color': 'lightgray', 'color': 'white' });
+            //    },
+            //    mouseleave: function () {
+            //        $(this).css({ 'background-color': 'darkblue', 'color': 'yellow' });
+            //    },
+            //    click: function () {
+            //        $(this).css("background-color", "green");
+            //    }
+            //    });
+            //$("#flip").click(function () {
+            //    $("#panel").slideToggle("slow");
+            //});
+            $("button").click(function () {
+                var strng = $("strong");
+                strng.animate({ left: "300px" }, "slow");
+                strng.animate({ fontSize: "3em" }, "slow");
+                
+                $("#gg").css("color", "red").slideDown(4000).slideUp(4000);
+
+                strng.animate({ left: "100px" }, "slow");
+                strng.animate({ fontSize: "0em" }, "slow");
+            })
+
+        });
+
+        
+        //$(document).ready(function () {
+        //    $("p").addClass('gizle1');
+        //});
+
+    </script>
+</head>
+<body>
+    <p>burayı tıkladığında görünmez olacak</p>
+    <p>Devam Et</p>
+    <p>Devam Et1</p>
+    <!--<p class="gizle1">burayı tıkladığında görünmez olacak</p>
+    <p class="gizle1">deneme deneme</p>-->
+    <!--<button class="giz">Gizle</button>
+    <button class="goz">Göster</button>-->
+    <!--<button>Sil</button>-->
+    <!--İsim:&nbsp;&nbsp;&nbsp;<input type="text" name="isim" />
+    <br />
+    <br />
+    Email:&nbsp;<input type="text" name="email" />-->
+    <div id="flip">Buraya Tıklayın</div>
+    <div id="panel">Selam!!!</div>
+    
+    <p ><strong id="gg">Devam Et1</strong></p>
+    <button style="font-size:3em;">Animasyona Başla</button>
+</body>
+</html>

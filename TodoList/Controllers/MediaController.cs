@@ -61,21 +61,7 @@ namespace TodoList.Controllers
                 media.UpdateDate = DateTime.Now;
                 media.UpdatedBy = User.Identity.Name;
 
-                // upload işlemi 
-                //if (file != null && file.ContentLength > 0)
-                //{
-                //    var uploadLocation = Server.MapPath("~/uploads");
-                //    var categoryFolder = "/" + media.Year.ToString() + "-" + media.Month.ToString() + "/";
-                //    var fileName = file.FileName;
-                //    var extension = Path.GetExtension(fileName);
-                //    var contentType = file.ContentType;
-                //    float fileSize = ((float)file.ContentLength) / ((float)1024);
-
-                //    if (!Directory.Exists(uploadLocation + categoryFolder))
-                //    {
-                //        Directory.CreateDirectory(uploadLocation + categoryFolder);
-                //    }
-                //    file.SaveAs(uploadLocation + categoryFolder + fileName);
+                // upload işlemi
                 if (!String.IsNullOrEmpty(media.FilePath)) { 
                     FileInfo fileInfo = new FileInfo(Server.MapPath("~"+media.FilePath));
                     media.FileSize = ((float)fileInfo.Length)/((float)1024);
