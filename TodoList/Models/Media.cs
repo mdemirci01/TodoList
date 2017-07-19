@@ -27,5 +27,8 @@ namespace TodoList.Models
         public int Year { get; set; }
         [DisplayName("Ay")]
         public int Month { get; set; }
+        [StringLength(200)]
+        [DisplayName("İçerik Tipi")]
+        public string ContentType { get; set; }
     }
 }

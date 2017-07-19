@@ -39,8 +39,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilePath)
-        </dd>
+            <a href="@Model.FilePath" target="_blank">@Html.DisplayFor(model => model.FilePath)</a>
+</dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.FileSize)
