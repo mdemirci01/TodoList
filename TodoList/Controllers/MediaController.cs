@@ -144,7 +144,13 @@ namespace TodoList.Controllers
                         {
                             Directory.CreateDirectory(uploadLocation + categoryFolder);
                         }
-                        file.SaveAs(uploadLocation + categoryFolder + fName);
+                        if (!System.IO.File.Exists(uploadLocation + categoryFolder + fName))
+                        {
+                            file.SaveAs(uploadLocation + categoryFolder + fName);
+                        } else
+                        {
+                            throw new Exception("Dosya zaten var");
+                        }
                     }
                 }
 
@@ -157,11 +163,11 @@ namespace TodoList.Controllers
 
             if (isSavedSuccessfully)
             {
-                return Json(new { Message = "/uploads" + categoryFolder + fName });
+                return Json(new { Message = "/uploads" + categoryFolder + fName, success = true });
             }
             else
             {
-                return Json(new { Message = "Hata oldu, dosya kaydedilemedi." });
+                return Json(new { Message = "Hata oldu, dosya kaydedilemedi.", success=false });
             }
         }
 

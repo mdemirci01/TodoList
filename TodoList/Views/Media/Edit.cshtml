@@ -98,11 +98,14 @@
 <script src="/assets/global/plugins/dropzone/dropzone.min.js" type="text/javascript"></script>
 <script>
         $("div#my-dropzone").dropzone({
-            url: "/Media/SaveUploadedFile", init: function () {
+            url: "/Media/SaveUploadedFile", uploadMultiple: false, maxFiles: 1, init: function () {
                 this.on("complete", function (data) {
                     //var res = eval('(' + data.xhr.responseText + ')');
                     var res = JSON.parse(data.xhr.responseText);
                     $("#FilePath").val(res.Message);
+                    if (res.success == false) {
+                        $("#FilePath").css("border-color", "red");
+                    }
                 });
             } });
         //File Upload response from the server
