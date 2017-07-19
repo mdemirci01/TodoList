@@ -52,7 +52,7 @@ namespace TodoList.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +60,30 @@ namespace TodoList.Controllers
                 media.CreatedBy = User.Identity.Name;
                 media.UpdateDate = DateTime.Now;
                 media.UpdatedBy = User.Identity.Name;
+
+                // upload işlemi 
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var uploadLocation = Server.MapPath("~/uploads");
+                    var categoryFolder = "/" + media.Year.ToString() + "-" + media.Month.ToString() + "/";
+                    var fileName = upload.FileName;
+                    var extension = Path.GetExtension(fileName);
+                    var contentType = upload.ContentType;
+                    float fileSize = ((float)upload.ContentLength) / ((float)1024);
+
+                    if (!Directory.Exists(uploadLocation + categoryFolder))
+                    {
+                        Directory.CreateDirectory(uploadLocation + categoryFolder);
+                    }
+                    upload.SaveAs(uploadLocation + categoryFolder + fileName);
+
+                    media.FilePath = "/uploads" + categoryFolder + fileName;
+                    media.FileSize = fileSize;
+                    media.Extension = extension;
+                    media.ContentType = contentType;
+                }
+
+
                 db.Medias.Add(media);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

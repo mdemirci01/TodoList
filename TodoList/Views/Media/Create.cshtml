@@ -7,7 +7,7 @@
 <h2>Oluştur</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Media", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -30,46 +30,21 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
+        @Html.HiddenFor(model => model.Extension)
+        
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Extension, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Dosya:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Extension, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Extension, "", new { @class = "text-danger" })
+                <input type="file" name="upload" id="upload" required />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FilePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileSize, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FileSize, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FileSize, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" , @Value=Model.Year.ToString(DateTime.Now.Year.ToString())} })
-                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Month, new { htmlAttributes = new { @class = "form-control", @Value = Model.Year.ToString(DateTime.Now.Month.ToString()) } })
-                @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
-            </div>
-        </div>
+      
+                @Html.HiddenFor(model => model.FileSize)
+                @Html.HiddenFor(model => model.Year, new {@Value=Model.Year.ToString(DateTime.Now.Year.ToString())} )
+                @Html.HiddenFor(model => model.Month, new {@Value = Model.Year.ToString(DateTime.Now.Month.ToString()) })
+               
         @Html.HiddenFor(model => model.CreateDate)
 
         @Html.HiddenFor(model => model.CreatedBy)
