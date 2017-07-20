@@ -17,10 +17,10 @@
     }
 </style>
 
-@using (Html.BeginForm("Create", "Media", FormMethod.Post, new { enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Create", "Media", FormMethod.Post, new { @id = "modalForm" + ViewBag.Element, enctype = "multipart/form-data"}))
 {
-    @Html.AntiForgeryToken()
     
+    <input type="hidden" name="element" value="@ViewBag.Element" />
     <div class="form-horizontal">
         <h4>Dosya</h4>
         <hr />
@@ -71,16 +71,81 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                @if (Request.IsAjaxRequest()) { 
+                <button type="button" tabindex="10" class="btn btn-primary" id="modalSave" onclick="modalSaveFunc@(ViewBag.Element)()">Oluştur</button>
+                } else { 
                 <input type="submit" value="Oluştur" class="btn btn-primary" />
+                }
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Listeye Geri Dön", "Index")
-</div>
-
+@{ 
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+@if (!Request.IsAjaxRequest())
+{
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "Index")
+    </div>
+}
+@if (Request.IsAjaxRequest())
+{
+    <script src="/assets/global/plugins/dropzone/dropzone.min.js" type="text/javascript"></script>
+    <script>
+        $("div#my-dropzone").dropzone({
+            url: "/Media/SaveUploadedFile", uploadMultiple: false, maxFiles: 1, init: function () {
+                this.on("complete", function (data) {
+                    //var res = eval('(' + data.xhr.responseText + ')');
+                    var res = JSON.parse(data.xhr.responseText);
+                    $("#FilePath").val(res.Message);
+                    if (res.success == false) {
+                        $("#FilePath").css("border-color", "red");
+                    }
+                });
+            }
+        });
+        //File Upload response from the server
+        if ('@Model.FilePath' != '') {
+            $("#@ViewBag.Element").val('@Model.FilePath');
+        }
+        function modalSaveFunc@(ViewBag.Element)() {
+            var data = new FormData(document.getElementById("modalForm" + "@ViewBag.Element"));
+            $.ajax({
+                url: "/Media/Create",
+                cache: false,
+                type: "POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.result == "false") {
+                        alert("İşlem başarısız");
+                    }
+                    else {
+                        var modal = $('#modal' + '@(ViewBag.Element)');
+                        modal.find('.modal-body').html('');
+                        modal.find('.modal-footer').html('');
+                        modal.find('.modal-body').append("<h1 class='text-success'>İşlem Başarılı</h1>")
+                        var delay = 1000;
+                        setTimeout(function () { $('#modal' + '@(ViewBag.Element)').modal('hide'); }, delay);
+                        $('#@(ViewBag.Element)').val(data.result)
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseText);
+                    } else {
+                        alert('Unexpected error.');
+                    }
+                }
+            });
+        }
+    </script>
+}
 @section Scripts {
     <script src="/assets/global/plugins/dropzone/dropzone.min.js" type="text/javascript"></script>
     <script>
@@ -96,7 +161,7 @@
                 });
             } });
         //File Upload response from the server
-     
+      
     </script>
     @Scripts.Render("~/bundles/jqueryval")
 }

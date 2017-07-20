@@ -41,9 +41,10 @@ namespace TodoList.Controllers
         }
 
         // GET: Media/Create
-        public ActionResult Create()
+        public ActionResult Create(string element = "")
         {
             var media = new Media();
+            ViewBag.Element = element;
             return View(media);
         }
 
@@ -51,8 +52,7 @@ namespace TodoList.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,ContentType,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Extension,ContentType,FilePath,FileSize,Year,Month,CreateDate,CreatedBy,UpdateDate,UpdatedBy")] Media media, string element = "")
         {
             if (ModelState.IsValid)
             {
@@ -72,10 +72,21 @@ namespace TodoList.Controllers
 
                 db.Medias.Add(media);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (!Request.IsAjaxRequest()) { 
+                    return RedirectToAction("Index");
+                } else
+                {
+                    return Json(new { result = media.FilePath });
+                }
             }
-
-            return View(media);
+            ViewBag.Element = element;
+            if (!Request.IsAjaxRequest())
+            {
+                return View(media);
+            } else
+            {
+                return Json(new { result = false });
+            }
         }
 
         // GET: Media/Edit/5

@@ -6008,6 +6008,7 @@
     <Content Include="Views\Departments\Edit.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\TodoItems\ExportToExcel.cshtml" />
+    <Content Include="Views\Shared\_BrowseMedia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

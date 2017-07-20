@@ -50,7 +50,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="input-group">
+                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Attachment')">...</a>
+                    </span>
+                </div>
                 @Html.ValidationMessageFor(model => model.Attachment, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -295,7 +300,7 @@
 <div>
     @Html.ActionLink("Listeye Geri Dön", "Index")
 </div>
-
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Attachment" } })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
