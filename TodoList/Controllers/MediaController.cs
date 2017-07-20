@@ -279,6 +279,22 @@ namespace TodoList.Controllers
             Response.Write(sw.ToString());
             Response.End();
         }
+        public IEnumerable<Media> MediaGallery(string word, int? year, int? month, string category)
+        {
+            var mediagallery = db.Medias.Where(w => w.CreateDate.Year == year && w.CreateDate.Month == month).ToList();
 
+            if (!string.IsNullOrEmpty(word))
+            {
+                mediagallery = mediagallery.Where(w => w.Name.Contains(word) || w.Description.Contains(word) || w.FilePath.Contains(word)).ToList();
+            }
+            return mediagallery;
+        }
+
+
+        public JsonResult ModalGallery(string word, int year, int month, string category)
+        {
+            var mediagallery = MediaGallery(word, year, month, category);
+            return Json(new { result = mediagallery });
+        }
     }
 }

@@ -300,7 +300,8 @@
 <div>
     @Html.ActionLink("Listeye Geri Dön", "Index")
 </div>
-@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Attachment" } })
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Attachment" } })
 }
