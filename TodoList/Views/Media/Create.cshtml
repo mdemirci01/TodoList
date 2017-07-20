@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Yeni Medya";
 }
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
 <link href="/assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet" type="text/css" />
 <link href="/assets/global/plugins/dropzone/basic.min.css" rel="stylesheet" type="text/css" />
 <h2>Oluştur</h2>
@@ -80,12 +86,7 @@
         </div>
     </div>
 }
-@{ 
-    if (Request.IsAjaxRequest())
-    {
-        Layout = null;
-    }
-}
+
 @if (!Request.IsAjaxRequest())
 {
     <div>
